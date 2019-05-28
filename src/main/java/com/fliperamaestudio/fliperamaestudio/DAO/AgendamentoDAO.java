@@ -4,6 +4,7 @@ import com.fliperamaestudio.fliperamaestudio.model.Agendamento;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class AgendamentoDAO {
@@ -32,7 +33,7 @@ public class AgendamentoDAO {
         return false;
     }
 
-    public ArrayList<Agendamento> getAgendamentos(){
+    public ArrayList<Agendamento> getAgendamentos(LocalDateTime dia){
 
         ArrayList<Agendamento> agendamentos = new ArrayList<>();
 
@@ -41,7 +42,8 @@ public class AgendamentoDAO {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM agendamento, usuario " +
-                    "WHERE agendamento.id_usuario = usuario.id_usuario");
+                    "WHERE agendamento.id_usuario = usuario.id_usuario AND agendamento.data_hora  =" +
+                    Timestamp.valueOf(dia));
 
             while (rs.next()){
 
