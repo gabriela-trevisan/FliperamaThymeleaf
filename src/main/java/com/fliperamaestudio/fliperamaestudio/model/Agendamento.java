@@ -1,7 +1,9 @@
 package com.fliperamaestudio.fliperamaestudio.model;
 
 
+import javax.swing.text.DateFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Agendamento {
 
@@ -10,6 +12,7 @@ public class Agendamento {
     private Usuario reserva;
     private Usuario reservaFunc;
     private boolean reservado;
+    public static final DateTimeFormatter formatador =  DateTimeFormatter.ofPattern("yyyy/mm/dd hh:mm:ss");
 
 //    public Agendamento(int ano, int mes, int dia, int hora, Usuario reserva) {
 //        dataHora= LocalDateTime.of(ano, mes, dia, hora, 00);

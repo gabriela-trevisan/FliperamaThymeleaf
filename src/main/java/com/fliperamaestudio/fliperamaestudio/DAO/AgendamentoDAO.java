@@ -5,6 +5,7 @@ import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class AgendamentoDAO {
@@ -39,11 +40,22 @@ public class AgendamentoDAO {
 
         try(Connection conn = ConnectPostgres.getConnection()){
 
-            Statement stmt = conn.createStatement();
+            String sql = "SELECT * FROM agendamento, usuario " +
+                    "WHERE agendamento.id_usuario = usuario.id_usuario AND agendamento.data_hora  = ?";
+
+
+            PreparedStatement pre = conn.prepareStatement(sql);
+
+            pre.setString(1, dia.format(Agendamento.formatador));
+
+             ResultSet rs = pre.executeQuery();
+
+
+            /*Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM agendamento, usuario " +
-                    "WHERE agendamento.id_usuario = usuario.id_usuario AND agendamento.data_hora  =" +
-                    Timestamp.valueOf(dia));
+                    "WHERE agendamento.id_usuario = usuario.id_usuario AND agendamento.data_hora  = " +
+                dia.format(Agendamento.formatador));*/
 
             while (rs.next()){
 
