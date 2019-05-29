@@ -3,6 +3,7 @@ package com.fliperamaestudio.fliperamaestudio.controller;
 
 import com.fliperamaestudio.fliperamaestudio.DAO.AgendamentoDAO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,17 +15,14 @@ import java.time.LocalDateTime;
 @RequestMapping("/agendamento")
 public class AgendamentoController {
 
+
     @GetMapping
-    public String returnAgenda(){
+    public String returnAgendaDia (Model model){
 
-        new AgendamentoDAO().getAgendamentos(LocalDateTime.now());
+            model.addAttribute("agendamentos",new AgendamentoDAO().getAgendamentos(LocalDateTime.now()));
 
-        return "agendamento";
-    }
 
-    @GetMapping("/{dia}")
-    public String returnAgendaDia(@PathVariable Timestamp dia){
-        new AgendamentoDAO().getAgendamentos(LocalDateTime.parse(dia.toString()));
+
         
         return "agendamento";
     }

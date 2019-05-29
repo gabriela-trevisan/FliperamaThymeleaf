@@ -3,6 +3,8 @@ package com.fliperamaestudio.fliperamaestudio.DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+
+
 public class ConnectPostgres {
 
     public static Connection getConnection() throws Exception{

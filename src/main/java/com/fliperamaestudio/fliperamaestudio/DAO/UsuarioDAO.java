@@ -61,4 +61,33 @@ public class UsuarioDAO {
         return false;
 
     }
+
+
+    public Usuario retornarUsuario(Usuario usuario){
+
+        try(Connection conn = ConnectPostgres.getConnection()){
+
+            String sql = "SELECT * FROM usuario WHERE nome = ? and senha = ?";
+
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+
+            preStmt.setString(1, usuario.getNome());
+            preStmt.setString(2, usuario.getSenha());
+
+            ResultSet rs = preStmt.executeQuery();
+
+            while (rs.next()) {
+                usuario.setIdUsuario(rs.getInt("id_usuario"));
+                usuario.setTipo(Tipo.valueOf(rs.getString("tipo_usuario") ) );
+                return usuario;
+            }
+
+
+
+
+        }catch (Exception e){ e.printStackTrace();}
+
+        return usuario;
+
+    }
 }
