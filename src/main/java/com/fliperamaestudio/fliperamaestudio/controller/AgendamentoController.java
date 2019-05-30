@@ -22,7 +22,7 @@ public class AgendamentoController {
     public String returnAgendaDia(Model model) {
 
         model.addAttribute( "usuario" ,new UsuarioDAO().retornarUsuario(new Usuario("joao","1234")));
-        model.addAttribute("agendamentos", new AgendamentoDAO().getAgendamentos(LocalDateTime.now()));
+        model.addAttribute("agendamentos", new AgendamentoDAO().getAgendamentos(LocalDateTime.parse("2019-06-23T18:00")));
 
 
         return "agendamento";
