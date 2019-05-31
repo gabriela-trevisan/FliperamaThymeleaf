@@ -6,9 +6,7 @@ import com.fliperamaestudio.fliperamaestudio.DAO.UsuarioDAO;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -19,10 +17,21 @@ public class AgendamentoController {
 
 
     @GetMapping
-    public String returnAgendaDia(Model model) {
+    public String returnAgendaDia( @RequestParam(defaultValue = "0") int dia, Model model) {
+        System.out.println(dia);
+        if(dia > 0){
 
-        model.addAttribute( "usuario" ,new UsuarioDAO().retornarUsuario(new Usuario("joao","1234")));
-        model.addAttribute("agendamentos", new AgendamentoDAO().getAgendamentos(LocalDateTime.parse("2019-06-23T18:00")));
+            model.addAttribute("agendamentos", new AgendamentoDAO().getAgendamentos(LocalDateTime.parse("2019-06-" + dia + "T18:00")));
+
+
+        }else{
+            model.addAttribute("agendamentos", new AgendamentoDAO().getAgendamentos(LocalDateTime.now()));
+            model.addAttribute( "usuario" ,new UsuarioDAO().retornarUsuario(new Usuario("joao","1234")));
+        }
+
+
+
+
 
 
         return "agendamento";
