@@ -43,13 +43,14 @@ public class AgendamentoDAO {
         try(Connection conn = ConnectPostgres.getConnection()){
 
             String sql = "SELECT * FROM agendamento, usuario " +
-                    "WHERE agendamento.id_usuario = usuario.id_usuario AND agendamento.data_hora  = ?" ;
+                    "WHERE agendamento.id_usuario = usuario.id_usuario AND agendamento.data_hora  BETWEEN ? AND ?" ;
             System.out.println(Timestamp.valueOf(dia));
 
 
             PreparedStatement pre = conn.prepareStatement(sql);
 
             pre.setTimestamp(1, Timestamp.valueOf(dia));
+            pre.setTimestamp(2, Timestamp.valueOf(dia.plusDays(1)));
 
 
              ResultSet rs = pre.executeQuery();
@@ -63,7 +64,7 @@ public class AgendamentoDAO {
 
             while (rs.next()){
 
-                agendamentos.put(rs.getTimestamp("data_hota").toLocalDateTime()
+                agendamentos.put(rs.getTimestamp("data_hora").toLocalDateTime()
                         .getHour(),new Agendamento( rs.getTimestamp("data_hora").toLocalDateTime(),
                         new Usuario(rs.getString("nome"),rs.getString("tipo_usuario") ) ) );
             }

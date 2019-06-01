@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="shortcut icon" type="image/x-icon" href="../resources/img/iconPreto.png">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/iconPreto.png}">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -17,8 +17,8 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="index"><img src="<%=request.getContextPath()%>/resources/img/iconBranco.png" alt="">
-        Fliperama Estúdio</a>
+    <a class="navbar-brand" href="/"><img th:src="@{/img/iconBranco.png}" alt="">Fliperama Estúdio</a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -42,9 +42,10 @@
 
 
 <br>
+<br>
 
-<div id="conteudo" class="row col-md-12">
-    <table id="tabela" class="table table-dark col-md-6 ml-5">
+<div id="conteudo" class="row col-12 ">
+    <table id="tabela" class="table table-dark col-6 offset-1">
         <thead>
         <tr>
             <td>
@@ -66,22 +67,22 @@
 
 
             <th scope="row" th:text="${i} + ':00'"></th>
-           <!-- <div th:each="agendamento : ${agendamentos}">-->
+            <!-- <div th:each="agendamento : ${agendamentos}">-->
 
-                <div th:if="${agendamentos.get(i)}">
+            <div th:if="${agendamentos.get(i)}">
 
-                    <td th:text="${usuario.getNome()}"></td>
-                    <td th:text="Agendado"></td>
+                <td th:text="${agendamentos.get(i).getReserva().getNome()}"></td>
+                <td th:text="Agendado"></td>
 
-                </div>
+            </div>
 
-                <div th:unless="${agendamentos.get(i)}">
+            <div th:unless="${agendamentos.get(i)}">
 
-                    <td th:text="'-'"></td>
-                    <td th:text="Disnponível"></td>
-                </div>
+                <td th:text="'-'"></td>
+                <td class="active btn-primary"><a href="a" th:text="Agendar"></a></td>
+            </div>
 
-           <!-- </div>-->
+            <!-- </div>-->
 
 
             <!--<div th:each="agendamento: ${agendamentos}">

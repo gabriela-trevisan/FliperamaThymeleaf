@@ -17,11 +17,11 @@ public class AgendamentoController {
 
 
     @GetMapping
-    public String returnAgendaDia( @RequestParam(defaultValue = "0") String dia, Model model) {
+    public String returnAgendaDia( @RequestParam(defaultValue = "") String dia, Model model) {
         System.out.println(dia);
 
 
-        if(dia.isBlank()){
+        if(!dia.isEmpty()){
 
             model.addAttribute("agendamentos", new AgendamentoDAO()
                     .getAgendamentos(LocalDateTime.parse("2019-06-" + dia + "T00:00")));
