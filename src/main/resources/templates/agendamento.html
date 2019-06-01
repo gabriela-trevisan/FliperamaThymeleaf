@@ -63,24 +63,25 @@
         </thead>
         <tbody>
         <tr th:each="i:${#numbers.sequence(7,21,1)}">
-            <div th:each="agendamento : ${agendamentos}">
 
-                <th scope="row" th:text="${i} + ':00'"></th>
 
-                <div th:if="${agendamento.getDataHora().getHour() == i}">
+            <th scope="row" th:text="${i} + ':00'"></th>
+           <!-- <div th:each="agendamento : ${agendamentos}">-->
 
-                    <td  th:text="${usuario.getNome()}"></td>
-                    <td  th:text="Agendado"></td>
+                <div th:if="${agendamentos.get(i)}">
+
+                    <td th:text="${usuario.getNome()}"></td>
+                    <td th:text="Agendado"></td>
 
                 </div>
 
-                <div th:unless="${agendamento.getDataHora().getHour() == i}" >
+                <div th:unless="${agendamentos.get(i)}">
 
                     <td th:text="'-'"></td>
                     <td th:text="Disnponível"></td>
                 </div>
 
-            </div>
+           <!-- </div>-->
 
 
             <!--<div th:each="agendamento: ${agendamentos}">

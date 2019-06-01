@@ -7,6 +7,8 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AgendamentoDAO {
 
@@ -34,9 +36,9 @@ public class AgendamentoDAO {
         return false;
     }
 
-    public ArrayList<Agendamento> getAgendamentos(LocalDateTime dia){
+    public Map<Integer, Agendamento> getAgendamentos(LocalDateTime dia){
 
-        ArrayList<Agendamento> agendamentos = new ArrayList<>();
+        Map< Integer, Agendamento> agendamentos = new HashMap<>();
 
         try(Connection conn = ConnectPostgres.getConnection()){
 
@@ -61,7 +63,8 @@ public class AgendamentoDAO {
 
             while (rs.next()){
 
-                agendamentos.add(new Agendamento( rs.getTimestamp("data_hora").toLocalDateTime(),
+                agendamentos.put(rs.getTimestamp("data_hota").toLocalDateTime()
+                        .getHour(),new Agendamento( rs.getTimestamp("data_hora").toLocalDateTime(),
                         new Usuario(rs.getString("nome"),rs.getString("tipo_usuario") ) ) );
             }
 

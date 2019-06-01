@@ -17,21 +17,23 @@ public class AgendamentoController {
 
 
     @GetMapping
-    public String returnAgendaDia( @RequestParam(defaultValue = "0") int dia, Model model) {
+    public String returnAgendaDia( @RequestParam(defaultValue = "0") String dia, Model model) {
         System.out.println(dia);
-        if(dia > 0){
 
-            model.addAttribute("agendamentos", new AgendamentoDAO().getAgendamentos(LocalDateTime.parse("2019-06-" + dia + "T18:00")));
+
+        if(dia.isBlank()){
+
+            model.addAttribute("agendamentos", new AgendamentoDAO()
+                    .getAgendamentos(LocalDateTime.parse("2019-06-" + dia + "T00:00")));
 
 
         }else{
-            model.addAttribute("agendamentos", new AgendamentoDAO().getAgendamentos(LocalDateTime.now()));
-            model.addAttribute( "usuario" ,new UsuarioDAO().retornarUsuario(new Usuario("joao","1234")));
+            model.addAttribute("agendamentos", new AgendamentoDAO()
+                    .getAgendamentos(LocalDateTime.now()));
+
+            model.addAttribute( "usuario" ,new UsuarioDAO()
+                    .retornarUsuario(new Usuario("joao","1234")));
         }
-
-
-
-
 
 
         return "agendamento";
