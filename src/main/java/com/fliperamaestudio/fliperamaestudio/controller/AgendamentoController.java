@@ -4,7 +4,8 @@ package com.fliperamaestudio.fliperamaestudio.controller;
 import com.fliperamaestudio.fliperamaestudio.DAO.AgendamentoDAO;
 import com.fliperamaestudio.fliperamaestudio.DAO.UsuarioDAO;
 import com.fliperamaestudio.fliperamaestudio.model.Agendamento;
-import com.fliperamaestudio.fliperamaestudio.model.Formatador;
+import com.fliperamaestudio.fliperamaestudio.model.DataHora;
+
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,28 +24,29 @@ public class AgendamentoController {
 
 
     @GetMapping
-    public String returnAgendaDia( @RequestParam(defaultValue = "0") int mes ,
-                                   @RequestParam(defaultValue = "0" ) int dia, Model model) {
-        System.out.println(dia);
-        System.out.println(Formatador.formmatter.format(dia));
+    public String returnAgendaDia(@RequestParam(defaultValue = "2018") int ano,
+                                  @RequestParam(defaultValue = "0") int mes,
+                                  @RequestParam(defaultValue = "0" ) int dia, Model model) {
+       /* System.out.println(dia);
+        System.out.println(Formatador.formmatter.format(dia));*/
 
-        LocalDateTime atual = LocalDateTime.now();
+        //LocalDateTime atual = LocalDateTime.now();
 
-        String data = Formatador.formmatter.format(atual.getMonth().getValue()) + "/" +
+        /*String data = Formatador.formmatter.format(atual.getMonth().getValue()) + "/" +
                 Formatador.formmatter.format(atual.getDayOfMonth());
-
-        if(dia > 0 && mes >0 && mes < 12){
+*/
+        if(dia > 0 && mes >0 && mes < 12 && ano > 2018 ){
             try{
+                DataHora data = new DataHora(ano, mes, dia);
 
-                model.addAttribute("data", mes + "/" + dia );
+                model.addAttribute("data", data );
                 model.addAttribute("agendamentos", new AgendamentoDAO()
-                        .getAgendamentos(LocalDateTime.parse("2019-06-" +
-                                Formatador.formmatter.format(dia) + "T00:00")));
+                        .getAgendamentos(data.getDataHora()));
 
 
             }catch (Exception e){
 
-                model.addAttribute("data", data);
+                model.addAttribute("data", new DataHora(LocalDateTime.now()));
                 model.addAttribute("agendamentos", new AgendamentoDAO()
                         .getAgendamentos(LocalDateTime.now()));
 
@@ -55,7 +57,9 @@ public class AgendamentoController {
 
         }else{
 
-            model.addAttribute("data", data);
+
+
+            model.addAttribute("data", new DataHora(LocalDateTime.now()));
             model.addAttribute("agendamentos", new AgendamentoDAO()
                     .getAgendamentos(LocalDateTime.now()));
 
@@ -66,4 +70,7 @@ public class AgendamentoController {
 
         return "agendamento";
     }
+
+
+
 }

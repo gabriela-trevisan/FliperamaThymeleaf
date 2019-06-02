@@ -45,13 +45,13 @@
 <br>
 
 <div id="conteudo" class="row col-12 ">
-    <table id="tabela" class="table table-dark col-6 offset-1">
+    <table id="tabela" class="table table-dark col-5 offset-1">
         <thead>
         <tr>
             <td>
                 <button class="active btn-primary">Anterior</button>
             </td>
-            <td><h3 th:text="Dia + ' ' + ${data}"></h3></td>
+            <td><h3 th:text="${data.getData()}"></h3></td>
             <td>
                 <button class="active btn-primary">Proximo</button>
             </td>
@@ -66,7 +66,7 @@
         <tr th:each="i:${#numbers.sequence(7,21,1)}">
 
 
-            <th scope="row" th:text="${i} + ':00'"></th>
+            <th scope="row" th:text="${data.formatar(i)} + ':00'"></th>
             <!-- <div th:each="agendamento : ${agendamentos}">-->
 
             <div th:if="${agendamentos.get(i)}">
@@ -80,7 +80,7 @@
 
                 <td th:text="'-'"></td>
                 <td >
-                    <a class="btn btn-primary" th:href="@{/agendamento(dia='06',hora=${i})} " th:text="Agendar"></a>
+                    <a class="btn btn-primary" th:href="@{/agendamento/agendar(dia='06',hora=${i})} " th:text="Agendar"></a>
                 </td>
             </div>
 
