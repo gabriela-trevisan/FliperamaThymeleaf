@@ -51,7 +51,7 @@
             <td>
                 <button class="active btn-primary">Anterior</button>
             </td>
-            <td><h3>Dia 15/04</h3></td>
+            <td><h3 th:text="Dia + ' ' + ${data}"></h3></td>
             <td>
                 <button class="active btn-primary">Proximo</button>
             </td>
@@ -79,7 +79,9 @@
             <div th:unless="${agendamentos.get(i)}">
 
                 <td th:text="'-'"></td>
-                <td class="active btn-primary"><a href="a" th:text="Agendar"></a></td>
+                <td >
+                    <a class="btn btn-primary" th:href="@{/agendamento(dia='06',hora=${i})} " th:text="Agendar"></a>
+                </td>
             </div>
 
             <!-- </div>-->
