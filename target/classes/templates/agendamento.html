@@ -49,7 +49,9 @@
         <thead>
         <tr>
             <td>
-                <button class="active btn-primary">Anterior</button>
+                <button class="active btn-primary"  th:href="@{/agendamento(ano=${data.getDataHora().plusDays(1).getYear()},
+                    mes=${data.getDataHora().getMonthValue()},
+                        dia=${data.getDataHora().getDayOfMonth()})}"></button>
             </td>
             <td><h3 th:text="${data.getData()}"></h3></td>
             <td>

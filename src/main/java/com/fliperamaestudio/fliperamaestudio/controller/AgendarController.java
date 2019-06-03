@@ -1,23 +1,26 @@
 package com.fliperamaestudio.fliperamaestudio.controller;
 
+import com.fliperamaestudio.fliperamaestudio.DAO.AgendamentoDAO;
 import com.fliperamaestudio.fliperamaestudio.model.Agendamento;
 import com.fliperamaestudio.fliperamaestudio.model.DataHora;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/agendar")
+@SessionAttributes("usuario")
 public class AgendarController {
 
-    @GetMapping("/agendar")
+
+
+    @GetMapping
     public String agendarHora(@RequestParam int ano,
                               @RequestParam int mes,
                               @RequestParam int dia,
-                              @RequestParam int hora, Model model){
+                              @RequestParam int hora,
+                              @ModelAttribute("usuario") Usuario usuario, Model model){
 
         DataHora dataHora = new DataHora(ano, mes, dia, hora);
 
@@ -26,7 +29,7 @@ public class AgendarController {
 
             model.addAttribute("data", dataHora);
 
-            new AgendarController().agendarHora( new Agendamento( new Usuario(id, nome), dataHora.getDataHora() ) );
+            new AgendamentoDAO().agendarHora( new Agendamento(dataHora.getDataHora(), usuario));
 
             return "agendamento";
 
