@@ -49,13 +49,11 @@
         <thead>
         <tr>
             <td>
-                <button class="active btn-primary"  th:href="@{/agendamento(ano=${data.getDataHora().plusDays(1).getYear()},
-                    mes=${data.getDataHora().getMonthValue()},
-                        dia=${data.getDataHora().getDayOfMonth()})}"></button>
+                <a class=" btn btn-primary" th:href="@{/agendamento(ano=${data.diaAnterior()})}" th:text="Anterior"></a>
             </td>
             <td><h3 th:text="${data.getData()}"></h3></td>
             <td>
-                <button class="active btn-primary">Proximo</button>
+                <a class=" btn btn-primary" th:href="${data.proximoDia()}" th:text="Proximo"></a>
             </td>
         </tr>
         <tr>
@@ -81,8 +79,9 @@
             <div th:unless="${agendamentos.get(i)}">
 
                 <td th:text="'-'"></td>
-                <td >
-                    <a class="btn btn-primary" th:href="@{/agendamento/agendar(dia='06',hora=${i})} " th:text="Agendar"></a>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/agendamento/agendar(dia='06',hora=${i})} "
+                       th:text="Agendar"></a>
                 </td>
             </div>
 

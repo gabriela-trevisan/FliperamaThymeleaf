@@ -38,7 +38,7 @@ public class AgendamentoDAO {
 
     public Map<Integer, Agendamento> getAgendamentos(LocalDateTime dia){
 
-        Map< Integer, Agendamento> agendamentos = new HashMap<>();
+        Map< Integer, Agendamento> agendamentos = new HashMap<>(15);
 
         try(Connection conn = ConnectPostgres.getConnection()){
 

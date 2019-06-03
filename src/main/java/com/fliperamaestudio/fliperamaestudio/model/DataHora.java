@@ -25,6 +25,19 @@ public class DataHora {
         dataHora = LocalDateTime.of(LocalDate.of(ano, mes, dia), LocalTime.of(hora, 0));
     }
 
+    public String proximoDia(){
+        dataHora.plusDays(1);
+        return "/agendamento?ano=" + dataHora.getYear() + "&mes=" + dataHora.getMonthValue() + "&dia=" + dataHora.getDayOfMonth();
+    }
+
+    public int[] diaAnterior(){
+
+        dataHora.minusDays(1);
+
+        int[] datas = {dataHora.getYear(), dataHora.getMonthValue(), dataHora.getDayOfMonth()};
+
+        return datas;
+    }
 
     public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
