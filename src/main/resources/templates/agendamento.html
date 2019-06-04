@@ -49,11 +49,11 @@
         <thead>
         <tr>
             <td>
-                <a class=" btn btn-primary" th:href="@{/agendamento(ano=${data.diaAnterior()})}" th:text="Anterior"></a>
+                <a class=" btn btn-primary" th:href="@{/agendamento/anterior(data=${data.getDataHora()})}" th:text="Anterior"></a>
             </td>
             <td><h3 th:text="${data.getData()}"></h3></td>
             <td>
-                <a class=" btn btn-primary" th:href="${data.proximoDia()}" th:text="Proximo"></a>
+                <a class=" btn btn-primary" th:href="@{/agendamento/proximo(data=${data.getDataHora()})}" th:text="Proximo"></a>
             </td>
         </tr>
         <tr>

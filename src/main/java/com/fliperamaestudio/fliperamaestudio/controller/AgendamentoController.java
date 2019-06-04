@@ -24,9 +24,11 @@ public class AgendamentoController {
 
 
     @GetMapping
-    public String returnAgendaDia(@RequestParam(defaultValue = "2018") int ano,
-                                  @RequestParam(defaultValue = "0") int mes,
-                                  @RequestParam(defaultValue = "0" ) int dia, Model model) {
+    public String returnAgendaDia(@RequestParam(defaultValue = "") String data, Model model) {
+      //  System.out.println(LocalDateTime.parse(data));
+
+
+
        /* System.out.println(dia);
         System.out.println(Formatador.formmatter.format(dia));*/
 
@@ -35,13 +37,14 @@ public class AgendamentoController {
         /*String data = Formatador.formmatter.format(atual.getMonth().getValue()) + "/" +
                 Formatador.formmatter.format(atual.getDayOfMonth());
 */
-        if(dia > 0 && mes >0 && mes < 12 && ano > 2018 ){
+       // if(dia > 0 && mes >0 && mes < 12 && ano > 2018 ){
+        if(!data.isEmpty()){
             try{
-                DataHora data = new DataHora(ano, mes, dia);
+                DataHora dia = new DataHora(LocalDateTime.parse(data));
 
-                model.addAttribute("data", data );
+                model.addAttribute("data", dia );
                 model.addAttribute("agendamentos", new AgendamentoDAO()
-                        .getAgendamentos(data.getDataHora()));
+                        .getAgendamentos(dia.getDataHora()));
 
 
             }catch (Exception e){
