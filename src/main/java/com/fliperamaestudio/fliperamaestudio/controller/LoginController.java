@@ -1,6 +1,8 @@
 package com.fliperamaestudio.fliperamaestudio.controller;
 
 
+import com.fliperamaestudio.fliperamaestudio.DAO.UsuarioDAO;
+import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,19 +20,15 @@ public class LoginController {
     }
 
     @PostMapping
-    public String autenticaUsuario(@RequestParam(required = false) String nome, String senha, Model model){
+    public String autenticaUsuario(@RequestParam String nome, String senha, Model model){
+        var usuario = new Usuario(nome, senha);
 
-        if (nome == null || senha == null){
+        boolean retorno = new UsuarioDAO().autenticarUsuario(usuario);
 
-            //model.addAttribute("alerta", "alert('nome ou senha incorretos");
-
-            return "login";
-
-
-
-        }else{
-
+        if (retorno){
             return "/";
+        }else{
+            return "login";
         }
 
     }
