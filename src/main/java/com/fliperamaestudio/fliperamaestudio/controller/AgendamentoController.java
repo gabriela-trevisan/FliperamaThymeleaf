@@ -76,4 +76,19 @@ public class AgendamentoController {
 
 
 
+    @GetMapping("/proximo")
+    public String consultarProximoDia(@RequestParam String data){
+
+
+        return "redirect:/agendamento?data=" + LocalDateTime.parse(data).plusDays(1);
+    }
+
+    @GetMapping("/anterior")
+    public String consultarDiaAnterior(@RequestParam String data){
+
+        return "redirect:/agendamento?data=" + LocalDateTime.parse(data).minusDays(1);
+    }
+
+
+
 }
