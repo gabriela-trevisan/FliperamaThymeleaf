@@ -10,26 +10,31 @@ public class ClienteDAO {
 
         try(Connection conn = ConnectPostgres.getConnection()){
 
-            String sql = "INSERT INTO cliente(id_usuario, email) VALUES(?,?)";
+            int idUsuario = new UsuarioDAO().cadastroUsuario(cliente);
 
-            PreparedStatement pre = conn.prepareStatement(sql);
+            if(idUsuario >0){
 
-            new UsuarioDAO().cadastroUsuario(cliente);
+                String sql = "INSERT INTO cliente(id_usuario, email) VALUES(?,?)";
 
-            new UsuarioDAO().autenticarUsuario(cliente);
+                PreparedStatement pre = conn.prepareStatement(sql);
 
-            pre.setInt(1, cliente.getIdUsuario());
-            pre.setString(2,cliente.getEmail());
+                pre.setInt(1, idUsuario);
+                pre.setString(2,cliente.getEmail());
 
-            int retorno = pre.executeUpdate();
+                int retorno = pre.executeUpdate();
 
-            if(retorno > 0) return true;
+                return retorno > 0;
+            }
+
+
+            return false;
+
 
         }catch (Exception e){
             e.printStackTrace();
             return false;
         }
-        return false;
+
     }
 
 }

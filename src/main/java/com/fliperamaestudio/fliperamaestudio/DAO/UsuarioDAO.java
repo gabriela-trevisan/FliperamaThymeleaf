@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 
 public class UsuarioDAO {
 
-    public boolean cadastroUsuario(Usuario usuario){
+    public int cadastroUsuario(Usuario usuario){
         try(Connection conn = ConnectPostgres.getConnection()){
 
             String sql = "INSERT INTO usuario(nome, tipo_usuario, senha) VALUES(?,?,?)";
@@ -20,16 +20,41 @@ public class UsuarioDAO {
             pre.setString(2, usuario.getTipo().name());
             pre.setString(3, usuario.getSenha());
 
-            int retorno = pre.executeUpdate();
 
-            if(retorno > 0 ) return true;
+
+            pre.execute();
+
+            ResultSet rs = pre.get;
+
+
+                if(rs.next()){
+                    System.out.println(rs.getInt(1));
+                    return rs.getInt(1);
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         }catch (Exception e){
             e.printStackTrace();
-            return false;
+            return 0;
         }
-
-        return false;
+        return 0;
 
     }
 

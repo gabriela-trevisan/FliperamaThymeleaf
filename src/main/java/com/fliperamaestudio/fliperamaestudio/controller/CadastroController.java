@@ -3,6 +3,7 @@ package com.fliperamaestudio.fliperamaestudio.controller;
 
 import com.fliperamaestudio.fliperamaestudio.DAO.ClienteDAO;
 import com.fliperamaestudio.fliperamaestudio.model.Cliente;
+import com.fliperamaestudio.fliperamaestudio.model.Tipo;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,10 @@ public class CadastroController {
 
     @PostMapping
     public String cadastraUsuario(@RequestParam String nome, String email, String senha){
+
         var cliente = new Cliente(nome, email, senha);
+
+        cliente.setTipo(Tipo.CLI);
 
         boolean retorno = new ClienteDAO().cadastrarCliente(cliente);
 
