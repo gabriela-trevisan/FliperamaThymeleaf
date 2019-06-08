@@ -66,8 +66,7 @@ public class AgendamentoController {
             model.addAttribute("agendamentos", new AgendamentoDAO()
                     .getAgendamentos(LocalDateTime.now()));
 
-            model.addAttribute( "usuario" ,new UsuarioDAO()
-                    .retornarUsuario(new Usuario("joao","1234")));
+
         }
 
 

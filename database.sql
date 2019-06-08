@@ -4,7 +4,7 @@ CREATE TABLE usuario(
     id_usuario serial,
     nome VARCHAR(50),
     tipo_usuario VARCHAR(50),
-    senha VARCHAR(50),
+    senha VARCHAR(60),
     PRIMARY KEY (id_usuario)
 );
 

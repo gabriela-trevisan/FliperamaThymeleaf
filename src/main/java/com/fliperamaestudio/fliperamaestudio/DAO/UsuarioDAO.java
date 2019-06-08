@@ -6,6 +6,7 @@ import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class UsuarioDAO {
 
@@ -14,7 +15,7 @@ public class UsuarioDAO {
 
             String sql = "INSERT INTO usuario(nome, tipo_usuario, senha) VALUES(?,?,?)";
 
-            PreparedStatement pre = conn.prepareStatement(sql);
+            PreparedStatement pre = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             pre.setString(1, usuario.getNome());
             pre.setString(2, usuario.getTipo().name());
@@ -22,31 +23,11 @@ public class UsuarioDAO {
 
 
 
-            pre.execute();
+            int retorno = pre.executeUpdate();
 
-            ResultSet rs = pre.get;
+            ResultSet rs = pre.getGeneratedKeys();
 
-
-                if(rs.next()){
-                    System.out.println(rs.getInt(1));
-                    return rs.getInt(1);
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            if(retorno > 0) return rs.getInt(1);
 
 
 
@@ -87,32 +68,4 @@ public class UsuarioDAO {
 
     }
 
-
-    public Usuario retornarUsuario(Usuario usuario){
-
-        try(Connection conn = ConnectPostgres.getConnection()){
-
-            String sql = "SELECT * FROM usuario WHERE nome = ? and senha = ?";
-
-            PreparedStatement preStmt = conn.prepareStatement(sql);
-
-            preStmt.setString(1, usuario.getNome());
-            preStmt.setString(2, usuario.getSenha());
-
-            ResultSet rs = preStmt.executeQuery();
-
-            while (rs.next()) {
-                usuario.setIdUsuario(rs.getInt("id_usuario"));
-                usuario.setTipo(Tipo.valueOf(rs.getString("tipo_usuario") ) );
-                return usuario;
-            }
-
-
-
-
-        }catch (Exception e){ e.printStackTrace();}
-
-        return usuario;
-
-    }
 }
