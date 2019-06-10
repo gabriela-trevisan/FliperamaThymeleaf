@@ -1,6 +1,7 @@
 package com.fliperamaestudio.fliperamaestudio.controller;
 
 
+import com.fliperamaestudio.fliperamaestudio.DAO.ClienteDAO;
 import com.fliperamaestudio.fliperamaestudio.DAO.UsuarioDAO;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +18,7 @@ public class LoginController {
 
     @GetMapping
     public String returnLogin(){
+        new ClienteDAO().teste();
         return "login";
     }
 

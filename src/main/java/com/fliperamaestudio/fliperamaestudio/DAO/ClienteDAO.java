@@ -1,11 +1,15 @@
 package com.fliperamaestudio.fliperamaestudio.DAO;
 
+import com.fliperamaestudio.fliperamaestudio.config.SpringJdbcConfig;
 import com.fliperamaestudio.fliperamaestudio.model.Cliente;
+
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 public class ClienteDAO {
+
     public boolean cadastrarCliente(Cliente cliente){
 
         try(Connection conn = ConnectPostgres.getConnection()){
@@ -35,6 +39,25 @@ public class ClienteDAO {
             return false;
         }
 
+    }
+
+    public void teste() {
+
+        try{
+
+            var dataSource = new SpringJdbcConfig().postgresDataSource();
+
+            String sql = "SELECT email FROM CLIENTE WHERE email = 'luiza';";
+
+             var jdbcTemplate = new JdbcTemplate(dataSource);
+
+            String result = jdbcTemplate.queryForObject(sql, String.class);
+
+            System.out.println(result);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }
