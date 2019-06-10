@@ -1,16 +1,36 @@
 package com.fliperamaestudio.fliperamaestudio.model;
 
+
+import lombok.Data;
+
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+@Data
+@Entity
 public class Usuario {
+
+
+    @Id
+    @GeneratedValue
+    private int IdUsuario;
+
+    @Id
     private String nome;
+
+    @NotNull
     private Tipo tipo;
     private String senha;
-    private int IdUsuario;
+
+
 
     public Usuario(String nome, String senha) {
         this.nome = nome;
         this.senha = senha;
-
-
     }
 
     public Usuario(String nome, Tipo tipo) {
@@ -18,31 +38,4 @@ public class Usuario {
         this.tipo = tipo;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Tipo getTipo() {
-        return tipo;
-    }
-
-    public int getIdUsuario() {
-        return IdUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        IdUsuario = idUsuario;
-    }
-
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
-    }
 }

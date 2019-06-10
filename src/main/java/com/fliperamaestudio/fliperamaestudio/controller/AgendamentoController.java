@@ -1,22 +1,14 @@
 package com.fliperamaestudio.fliperamaestudio.controller;
 
 
-import com.fliperamaestudio.fliperamaestudio.DAO.AgendamentoDAO;
-import com.fliperamaestudio.fliperamaestudio.DAO.UsuarioDAO;
-import com.fliperamaestudio.fliperamaestudio.model.Agendamento;
+import com.fliperamaestudio.fliperamaestudio.dao.AgendamentoDAO;
 import com.fliperamaestudio.fliperamaestudio.model.DataHora;
 
-import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
-import java.text.DecimalFormat;
-import java.text.Format;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Formatter;
 
 @Controller
 @RequestMapping("/agendamento")

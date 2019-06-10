@@ -1,8 +1,8 @@
 package com.fliperamaestudio.fliperamaestudio.controller;
 
 
-import com.fliperamaestudio.fliperamaestudio.DAO.ClienteDAO;
-import com.fliperamaestudio.fliperamaestudio.DAO.UsuarioDAO;
+import com.fliperamaestudio.fliperamaestudio.dao.ClienteDAO;
+import com.fliperamaestudio.fliperamaestudio.dao.UsuarioDAO;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;

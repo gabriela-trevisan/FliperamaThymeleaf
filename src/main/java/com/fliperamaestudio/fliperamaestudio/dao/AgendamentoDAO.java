@@ -1,12 +1,10 @@
-package com.fliperamaestudio.fliperamaestudio.DAO;
+package com.fliperamaestudio.fliperamaestudio.dao;
 
 import com.fliperamaestudio.fliperamaestudio.model.Agendamento;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 

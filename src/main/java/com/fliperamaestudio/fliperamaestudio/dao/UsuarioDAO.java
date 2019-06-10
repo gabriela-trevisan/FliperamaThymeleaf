@@ -1,4 +1,4 @@
-package com.fliperamaestudio.fliperamaestudio.DAO;
+package com.fliperamaestudio.fliperamaestudio.dao;
 
 import com.fliperamaestudio.fliperamaestudio.model.Tipo;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;

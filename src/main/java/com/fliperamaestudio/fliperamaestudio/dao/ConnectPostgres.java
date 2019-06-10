@@ -1,4 +1,4 @@
-package com.fliperamaestudio.fliperamaestudio.DAO;
+package com.fliperamaestudio.fliperamaestudio.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
