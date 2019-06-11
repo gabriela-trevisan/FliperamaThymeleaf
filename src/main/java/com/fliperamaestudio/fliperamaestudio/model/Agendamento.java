@@ -1,17 +1,26 @@
 package com.fliperamaestudio.fliperamaestudio.model;
 
 
+import lombok.Data;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.swing.text.DateFormatter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Data
+@Entity
 public class Agendamento {
 
-
+    @Id
+    @Column(name = "data_hora")
     private LocalDateTime dataHora;
+
     private Usuario reserva;
     private Usuario reservaFunc;
-    private boolean reservado;
+    //private boolean reservado;
 
 
 //    public Agendamento(int ano, int mes, int dia, int hora, Usuario reserva) {
@@ -36,15 +45,5 @@ public class Agendamento {
     }
 
 
-    public LocalDateTime getDataHora() {
-        return dataHora;
-    }
 
-    public Usuario getReserva() {
-        return reserva;
-    }
-
-    public Usuario getReservaFunc() {
-        return reservaFunc;
-    }
 }

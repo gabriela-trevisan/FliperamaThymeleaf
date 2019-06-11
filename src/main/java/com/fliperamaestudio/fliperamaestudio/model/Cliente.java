@@ -1,5 +1,12 @@
 package com.fliperamaestudio.fliperamaestudio.model;
 
+
+import lombok.Data;
+
+import javax.persistence.Entity;
+
+@Data
+@Entity
 public class Cliente extends Usuario{
 
     private String email;
@@ -11,7 +18,5 @@ public class Cliente extends Usuario{
 
     }
 
-    public String getEmail() {
-        return email;
-    }
+
 }

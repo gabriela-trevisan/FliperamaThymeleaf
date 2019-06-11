@@ -4,10 +4,7 @@ package com.fliperamaestudio.fliperamaestudio.model;
 import lombok.Data;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -17,13 +14,17 @@ public class Usuario {
 
     @Id
     @GeneratedValue
+    @Column(name = "id_usuario")
     private int IdUsuario;
 
     @Id
+    @Column(name = "nome_usuario")
     private String nome;
 
     @NotNull
+    @Column(name = "tipo_usuario")
     private Tipo tipo;
+
     private String senha;
 
 
