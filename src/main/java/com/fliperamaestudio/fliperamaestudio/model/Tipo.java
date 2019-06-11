@@ -1,7 +1,14 @@
 package com.fliperamaestudio.fliperamaestudio.model;
 
-public enum Tipo {
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Tipo implements GrantedAuthority {
     SUPER,
     ADMIN,
     CLI;
+
+    @Override
+    public String getAuthority() {
+        return this.name();
+    }
 }

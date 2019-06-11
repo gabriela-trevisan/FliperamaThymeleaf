@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Integer> {
 
-    List<Agendamento> readAgendamentoByDataHoraBetween(LocalDateTime inicio, LocalDateTime fim);
+    List<Agendamento> findAgendamentoByDataHoraBetween(LocalDateTime inicio, LocalDateTime fim);
 }

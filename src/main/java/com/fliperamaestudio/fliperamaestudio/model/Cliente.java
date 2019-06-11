@@ -4,6 +4,7 @@ package com.fliperamaestudio.fliperamaestudio.model;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
 
 @Data
 @Entity
