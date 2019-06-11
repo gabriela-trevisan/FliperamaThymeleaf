@@ -9,12 +9,14 @@ import javax.persistence.Entity;
 @Entity
 public class Cliente extends Usuario{
 
-    private String email;
+    private int telefone;
+
+    private int diasEnsaiados;
 
 
-    public Cliente(String nome, String senha, String email) {
+    public Cliente(String nome, String senha, String email, int telefone) {
         super(nome, senha);
-        this.email=email;
+        this.telefone = telefone;
 
     }
 

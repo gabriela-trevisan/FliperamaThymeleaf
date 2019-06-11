@@ -2,13 +2,15 @@ package com.fliperamaestudio.fliperamaestudio.model;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Data
 @Entity
+@Data
+@NoArgsConstructor
 public class Usuario {
 
 
@@ -17,12 +19,15 @@ public class Usuario {
     @Column(name = "id_usuario")
     private int IdUsuario;
 
-    @Id
+
     @Column(name = "nome_usuario")
     private String nome;
 
-    @NotNull
-    @Column(name = "tipo_usuario")
+    @Column(unique = true)
+    private String email;
+
+
+    @Column(name = "tipo_usuario", nullable = false)
     private Tipo tipo;
 
     private String senha;

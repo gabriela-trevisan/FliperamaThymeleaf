@@ -2,23 +2,29 @@ package com.fliperamaestudio.fliperamaestudio.model;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.swing.text.DateFormatter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Agendamento {
 
     @Id
     @Column(name = "data_hora")
     private LocalDateTime dataHora;
 
+    @ManyToOne
+    @JoinColumn
+    @Column(nullable = false)
     private Usuario reserva;
+
+    @ManyToOne
+    @JoinColumn
     private Usuario reservaFunc;
     //private boolean reservado;
 
