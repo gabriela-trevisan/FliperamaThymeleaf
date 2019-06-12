@@ -1,6 +1,6 @@
 package com.fliperamaestudio.fliperamaestudio.dao;
 
-import com.fliperamaestudio.fliperamaestudio.config.SpringJdbcConfig;
+
 import com.fliperamaestudio.fliperamaestudio.model.Cliente;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 
 public class ClienteDAO {
 
-    public boolean cadastrarCliente(Cliente cliente){
+    /*public boolean cadastrarCliente(Cliente cliente){
 
         try(Connection conn = ConnectPostgres.getConnection()){
 
@@ -59,5 +59,5 @@ public class ClienteDAO {
             e.printStackTrace();
         }
     }
-
+*/
 }

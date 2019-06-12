@@ -27,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/usuario/*").hasAnyRole()
                 .antMatchers("/agendamento/agendar").hasAnyRole()
                 .antMatchers("/**").permitAll()
+                .antMatchers("/cadastrar").permitAll()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/usuario/agendamento")
                 .failureUrl("/login?error")

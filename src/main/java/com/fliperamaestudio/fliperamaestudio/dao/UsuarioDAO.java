@@ -10,7 +10,7 @@ import java.sql.Statement;
 
 public class UsuarioDAO {
 
-    public int cadastroUsuario(Usuario usuario){
+    /*public int cadastroUsuario(Usuario usuario){
         try(Connection conn = ConnectPostgres.getConnection()){
 
             String sql = "INSERT INTO usuario(nome, tipo_usuario, senha) VALUES(?,?,?)";
@@ -66,6 +66,6 @@ public class UsuarioDAO {
 
         return false;
 
-    }
+    }*/
 
 }

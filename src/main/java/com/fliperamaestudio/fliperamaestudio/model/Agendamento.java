@@ -15,16 +15,18 @@ import java.time.format.DateTimeFormatter;
 public class Agendamento {
 
     @Id
-    @Column(name = "data_hora")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "data_hora", nullable = false)
     private LocalDateTime dataHora;
 
+
+    //@Column(nullable = false, name = "id_usuario")
     @ManyToOne
-    @JoinColumn
-    @Column(nullable = false)
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario reserva;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "id_func" )
     private Usuario reservaFunc;
     //private boolean reservado;
 

@@ -1,5 +1,6 @@
 package com.fliperamaestudio.fliperamaestudio.security;
 
+import com.fliperamaestudio.fliperamaestudio.model.Tipo;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

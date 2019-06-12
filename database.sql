@@ -5,12 +5,14 @@ CREATE TABLE usuario(
     nome VARCHAR(50),
     tipo_usuario VARCHAR(50),
     senha VARCHAR(60),
+    email VARCHAR(50),
     PRIMARY KEY (id_usuario)
 );
 
 CREATE TABLE cliente(
     id_usuario int,
-    email VARCHAR(50),
+    telefone int,
+    dias_ensaiados int,
     PRIMARY KEY (id_usuario),
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)    
 );

@@ -1,12 +1,9 @@
 package com.fliperamaestudio.fliperamaestudio.controller;
 
 
-import com.fliperamaestudio.fliperamaestudio.dao.ClienteDAO;
-import com.fliperamaestudio.fliperamaestudio.dao.UsuarioDAO;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.fliperamaestudio.fliperamaestudio.security.UserPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +13,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/login")
 public class LoginController {
 
+    private final UserPrincipal userPrincipal;
+
+    public LoginController(UserPrincipal userPrincipal) {
+        this.userPrincipal = userPrincipal;
+    }
+
     @GetMapping
     public String returnLogin(){
-        new ClienteDAO().teste();
+
         return "login";
     }
 
     @PostMapping
+    public String autenticarUsuario(@RequestParam String email, @RequestParam String senha) {
+
+        var usuario = new Usuario(email, senha);
+
+        Usuario retorno = userPrincipal.
+
+    }
+
+   /* @PostMapping
     public String autenticaUsuario(@RequestParam String nome, String senha, Model model){
         var usuario = new Usuario(nome, new BCryptPasswordEncoder().encode(senha));
 
@@ -34,6 +46,6 @@ public class LoginController {
             return "login";
         }
 
-    }
+    }*/
 
 }
