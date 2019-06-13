@@ -1,6 +1,7 @@
 package com.fliperamaestudio.fliperamaestudio.dao;
 
 import com.fliperamaestudio.fliperamaestudio.model.Agendamento;
+import com.fliperamaestudio.fliperamaestudio.model.Tipo;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 
 import java.sql.*;
@@ -64,7 +65,7 @@ public class AgendamentoDAO {
 
                 agendamentos.put(rs.getTimestamp("data_hora").toLocalDateTime()
                         .getHour(),new Agendamento( rs.getTimestamp("data_hora").toLocalDateTime(),
-                        new Usuario(rs.getString("nome"),rs.getString("tipo_usuario") ) ) );
+                        new Usuario(rs.getString("nome"), Tipo.valueOf(rs.getString("tipo_usuario") ) ) ) );
             }
 
         }catch (Exception e){e.printStackTrace();}

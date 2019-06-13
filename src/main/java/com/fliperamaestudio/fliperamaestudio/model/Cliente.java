@@ -18,8 +18,8 @@ public class Cliente extends Usuario{
     private int diasEnsaiados;
 
 
-    public Cliente(String nome, String senha, String email, int telefone) {
-        super(nome, senha);
+    public Cliente(String nome, String email, String senha, int telefone) {
+        super(nome, email, senha);
         this.telefone = telefone;
 
     }

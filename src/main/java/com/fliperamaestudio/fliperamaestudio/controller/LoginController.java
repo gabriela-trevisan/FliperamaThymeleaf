@@ -2,6 +2,7 @@ package com.fliperamaestudio.fliperamaestudio.controller;
 
 
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
+import com.fliperamaestudio.fliperamaestudio.security.UserDetailsServiceImpl;
 import com.fliperamaestudio.fliperamaestudio.security.UserPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/login")
 public class LoginController {
 
-    private final UserPrincipal userPrincipal;
+    /*private final UserPrincipal userPrincipal;
 
     public LoginController(UserPrincipal userPrincipal) {
         this.userPrincipal = userPrincipal;
-    }
+    }*/
 
     @GetMapping
     public String returnLogin(){
@@ -25,14 +26,7 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping
-    public String autenticarUsuario(@RequestParam String email, @RequestParam String senha) {
 
-        var usuario = new Usuario(email, senha);
-
-        Usuario retorno = userPrincipal.
-
-    }
 
    /* @PostMapping
     public String autenticaUsuario(@RequestParam String nome, String senha, Model model){
