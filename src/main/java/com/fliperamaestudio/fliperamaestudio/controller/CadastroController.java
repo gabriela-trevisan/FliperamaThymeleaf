@@ -31,7 +31,7 @@ public class CadastroController {
     public String cadastraUsuario(@RequestParam String nome,
                                   @RequestParam String email,
                                   @RequestParam String senha,
-                                  @RequestParam int telefone){
+                                  @RequestParam String telefone){
 
 
         var cliente = new Cliente(nome, email, senha, telefone);

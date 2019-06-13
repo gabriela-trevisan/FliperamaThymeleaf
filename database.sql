@@ -11,7 +11,7 @@ CREATE TABLE usuario(
 
 CREATE TABLE cliente(
     id_usuario int,
-    telefone int,
+    telefone varchar(50),
     dias_ensaiados int,
     PRIMARY KEY (id_usuario),
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)    

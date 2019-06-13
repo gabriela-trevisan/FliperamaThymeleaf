@@ -13,12 +13,12 @@ import javax.persistence.Inheritance;
 public class Cliente extends Usuario{
 
 
-    private int telefone;
+    private String telefone;
 
     private int diasEnsaiados;
 
 
-    public Cliente(String nome, String email, String senha, int telefone) {
+    public Cliente(String nome, String email, String senha, String telefone) {
         super(nome, email, senha);
         this.telefone = telefone;
 

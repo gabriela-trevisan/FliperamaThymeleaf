@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").permitAll()
                 .antMatchers("/cadastrar").permitAll()
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/agendamento")
+                .formLogin().loginPage("/login").defaultSuccessUrl("/login/autenticado")
                 .failureUrl("/login?error")
                 .usernameParameter("email").passwordParameter("senha")
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/agendamento");
