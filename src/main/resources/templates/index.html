@@ -37,7 +37,16 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="login">Login</a>
+
+                <div th:if="${#session}">
+                    <a class="nav-link" href="login">Logado</a>
+                </div>
+
+                <div th:unless="${#session}">
+                    <a class="nav-link" href="login">Login</a>
+                </div>
+
+
             </li>
 
         </ul>

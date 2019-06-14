@@ -20,9 +20,10 @@ public class AgendarController {
                               @RequestParam int mes,
                               @RequestParam int dia,
                               @RequestParam int hora,
-                              @ModelAttribute("usuario") Usuario usuario, Model model){
+                              @SessionAttribute("usuario") Usuario usuario, Model model){
 
         DataHora dataHora = new DataHora(ano, mes, dia, hora);
+
 
 
         try {

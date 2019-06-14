@@ -2,7 +2,11 @@ package com.fliperamaestudio.fliperamaestudio.controller;
 
 
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
+import com.fliperamaestudio.fliperamaestudio.security.UserPrincipal;
+import com.fliperamaestudio.fliperamaestudio.service.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -10,11 +14,17 @@ import org.springframework.web.bind.annotation.*;
 @SessionAttributes("usuario")
 public class LoginController {
 
+    private final UserService userService;
+
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
 
     @ModelAttribute("usuario")
-    public Usuario usuario(){
+    public Usuario usuarioSession(){
         return new Usuario();
     }
+
 
     /*private final UserPrincipal userPrincipal;
 
@@ -23,7 +33,7 @@ public class LoginController {
     }*/
 
     @GetMapping
-    public String returnLogin(@ModelAttribute Usuario usuario){
+    public String returnLogin() {
 
         return "login";
     }
@@ -40,11 +50,22 @@ public class LoginController {
 
     }*/
 
-   @GetMapping("/autenticado")
-    public String bbb(@ModelAttribute Usuario usuario){
-       System.out.println(usuario.getNome());
-       return "index";
-   }
+    @GetMapping("/autenticado")
+    public String salvaSession(@ModelAttribute("usuario") Usuario usuario, Model model) {
+        UserPrincipal usr = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        var retorno = userService.findEmail(usr.getUsername());
+
+        if (retorno != null){
+            usuario.setNome(retorno.getNome());
+            usuario.setTipo(retorno.getTipo());
+            usuario.setIdUsuario(retorno.getIdUsuario());
+        }
+
+
+
+        return "redirect:/agendamento";
+    }
 
 
 

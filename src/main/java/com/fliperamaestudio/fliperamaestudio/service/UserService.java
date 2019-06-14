@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.util.List;
 
 @Service
-@SessionAttributes("usuario")
 public class UserService {
 
     private final UserRepository userRepository;
@@ -28,6 +27,10 @@ public class UserService {
     public Usuario save(Usuario usuario) {
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         return userRepository.save(usuario);
+    }
+
+    public Usuario findEmail(String email){
+        return userRepository.findByEmail(email).orElse(null);
     }
 
 
