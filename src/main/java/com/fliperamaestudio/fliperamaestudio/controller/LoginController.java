@@ -2,25 +2,19 @@ package com.fliperamaestudio.fliperamaestudio.controller;
 
 
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
-import com.fliperamaestudio.fliperamaestudio.repository.UserRepository;
-import com.fliperamaestudio.fliperamaestudio.security.UserPrincipal;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/login")
+@SessionAttributes("usuario")
 public class LoginController {
 
 
-
-
-    /*@ModelAttribute(name = "usuario")
+    @ModelAttribute("usuario")
     public Usuario usuario(){
         return new Usuario();
-    }*/
+    }
 
     /*private final UserPrincipal userPrincipal;
 
@@ -29,12 +23,12 @@ public class LoginController {
     }*/
 
     @GetMapping
-    public String returnLogin(){
+    public String returnLogin(@ModelAttribute Usuario usuario){
 
         return "login";
     }
 
-    @GetMapping("/autenticado")
+   /* @GetMapping("/autenticado")
     public String insereUsuarioSession(){
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -44,7 +38,13 @@ public class LoginController {
 
         return "index";
 
-    }
+    }*/
+
+   @GetMapping("/autenticado")
+    public String bbb(@ModelAttribute Usuario usuario){
+       System.out.println(usuario.getNome());
+       return "index";
+   }
 
 
 

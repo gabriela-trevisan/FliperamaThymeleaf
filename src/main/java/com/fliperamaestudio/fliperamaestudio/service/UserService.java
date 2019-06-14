@@ -6,14 +6,18 @@ import com.fliperamaestudio.fliperamaestudio.repository.UserRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
 @Service
+@SessionAttributes("usuario")
 public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
 
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
