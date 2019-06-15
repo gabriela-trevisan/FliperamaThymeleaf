@@ -21,9 +21,9 @@ public class AgendamentoController {
 
 
     @GetMapping
-    public String returnAgendaDia(@SessionAttribute("usuario") Usuario usuario ,@RequestParam(defaultValue = "") String data, Model model) {
+    public String returnAgendaDia(@RequestParam(defaultValue = "") String data, Model model) {
       //  System.out.println(LocalDateTime.parse(data));
-        System.out.println(usuario.getNome());
+
 
 
        /* System.out.println(dia);

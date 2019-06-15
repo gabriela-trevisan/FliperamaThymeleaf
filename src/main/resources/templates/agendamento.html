@@ -33,11 +33,11 @@
             </li>
 
 
-            <div th:if="${session.isEmpty()}">
+            <div th:if="${#session}">
                 <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="'Bem vindo '
-                       + ${session.usuario.getNome()}"></a>
+                       + ${#session.getAttribute('usuario').getNome()}"></a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/logout" th:text="Logout"></a>
@@ -46,7 +46,7 @@
                 </li>
             </div>
 
-            <div th:unless="${session.isEmpty()}">
+            <div th:unless="${#session}">
 
                 <li class="nav-item">
 

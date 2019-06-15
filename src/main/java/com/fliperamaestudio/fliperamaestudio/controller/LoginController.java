@@ -20,10 +20,7 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @ModelAttribute("usuario")
-    public Usuario usuarioSession(){
-        return new Usuario();
-    }
+
 
 
     /*private final UserPrincipal userPrincipal;
@@ -49,6 +46,9 @@ public class LoginController {
         return "index";
 
     }*/
+
+
+
 
     @GetMapping("/autenticado")
     public String salvaSession(@ModelAttribute("usuario") Usuario usuario, Model model) {
