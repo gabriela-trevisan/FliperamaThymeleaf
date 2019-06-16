@@ -45,7 +45,7 @@ public class AgendarController {
 
                 model.addAttribute("data", dataHora);
 
-                return "redirect:/agendamento?data=" + dataHora;
+                return "redirect:/agendamento?data=" + dataHora.getData() + "T00:00";
 
             }
 
@@ -53,11 +53,35 @@ public class AgendarController {
 
         return "redirect:/login";
 
+    }
 
 
+    @GetMapping("/cancelar")
+    public String cancelarAgendamento(@RequestParam String data,
+                                      @SessionAttribute("usuario") Usuario usuario, Model model){
 
+        DataHora dataHora = new DataHora(LocalDateTime.parse(data));
 
+        try {
+
+            model.addAttribute("data", dataHora);
+
+            agendamentoRepository.delete(new Agendamento(dataHora.getDataHora(), usuario));
+
+            return "redirect:/agendamento?data=" + dataHora.getData() + "T00:00";
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            model.addAttribute("data", dataHora);
+
+            return "redirect:/agendamento?data=" + dataHora.getData() + "T00:00";
+
+        }
 
     }
+
+
 
 }
