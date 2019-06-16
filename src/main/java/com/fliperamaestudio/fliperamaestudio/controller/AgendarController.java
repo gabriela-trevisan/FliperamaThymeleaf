@@ -4,45 +4,54 @@ import com.fliperamaestudio.fliperamaestudio.dao.AgendamentoDAO;
 import com.fliperamaestudio.fliperamaestudio.model.Agendamento;
 import com.fliperamaestudio.fliperamaestudio.model.DataHora;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
+import com.fliperamaestudio.fliperamaestudio.repository.AgendamentoRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/agendar")
 @SessionAttributes("usuario")
 public class AgendarController {
+    private final AgendamentoRepository agendamentoRepository;
 
+    public AgendarController(AgendamentoRepository agendamentoRepository) {
+        this.agendamentoRepository = agendamentoRepository;    }
 
 
     @GetMapping
-    public String agendarHora(@RequestParam int ano,
-                              @RequestParam int mes,
-                              @RequestParam int dia,
-                              @RequestParam int hora,
-                              @SessionAttribute("usuario") Usuario usuario, Model model){
+    public String agendarHora(@RequestParam String data,
+                              @SessionAttribute(required = false, name = "usuario") Usuario usuario, Model model){
 
-        DataHora dataHora = new DataHora(ano, mes, dia, hora);
+        DataHora dataHora = new DataHora(LocalDateTime.parse(data));
 
 
+        if (usuario != null) {
 
-        try {
 
-            model.addAttribute("data", dataHora);
+            try {
 
-            new AgendamentoDAO().agendarHora( new Agendamento(dataHora.getDataHora(), usuario));
+                model.addAttribute("data", dataHora);
 
-            return "agendamento";
+                agendamentoRepository.save(new Agendamento(dataHora.getDataHora(), usuario));
 
-        }catch (Exception e){
+                return "redirect:/agendamento?data=" + dataHora.getData() + "T00:00";
 
-            e.printStackTrace();
+            } catch (Exception e) {
 
-            model.addAttribute("data", dataHora);
+                e.printStackTrace();
 
-            return "agendamento";
+                model.addAttribute("data", dataHora);
+
+                return "redirect:/agendamento?data=" + dataHora;
+
+            }
 
         }
+
+        return "redirect:/login";
 
 
 

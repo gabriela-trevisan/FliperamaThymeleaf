@@ -2,24 +2,28 @@ package com.fliperamaestudio.fliperamaestudio.controller;
 
 
 import com.fliperamaestudio.fliperamaestudio.dao.AgendamentoDAO;
+import com.fliperamaestudio.fliperamaestudio.model.Agendamento;
 import com.fliperamaestudio.fliperamaestudio.model.DataHora;
 
-import com.fliperamaestudio.fliperamaestudio.model.Usuario;
+import com.fliperamaestudio.fliperamaestudio.repository.AgendamentoRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/agendamento")
 @SessionAttributes("usuario")
 public class AgendamentoController {
 
+    private final AgendamentoRepository agendamentoRepository;
 
-
-
+    public AgendamentoController(AgendamentoRepository agendamentoRepository) {
+        this.agendamentoRepository = agendamentoRepository;
+    }
 
 
     @GetMapping
@@ -49,8 +53,8 @@ public class AgendamentoController {
             }catch (Exception e){
 
                 model.addAttribute("data", new DataHora(LocalDateTime.now()));
-                model.addAttribute("agendamentos", new AgendamentoDAO()
-                        .getAgendamentos(LocalDateTime.now()));
+                model.addAttribute("agendamentos", agendamentoRepository
+                        .findAgendamentoByDataHoraBetween(LocalDateTime.now(), LocalDateTime.now().plusDays(1)) );
 
                 e.printStackTrace();
             }
@@ -59,11 +63,21 @@ public class AgendamentoController {
 
         }else{
 
+            var diaHoje = LocalDateTime.now().minusHours(LocalDateTime.now().getHour());
+
+            var listaAgendamento = agendamentoRepository
+                    .findAgendamentoByDataHoraBetween(diaHoje, diaHoje.plusDays(1));
+
+            Map<Integer, Agendamento> hashDia = new HashMap<>(15);
+
+            for(Agendamento agend : listaAgendamento){
+                hashDia.put(agend.getDataHora().getHour(), agend);
+                System.out.println(diaHoje);
+            }
 
 
             model.addAttribute("data", new DataHora(LocalDateTime.now()));
-            model.addAttribute("agendamentos", new AgendamentoDAO()
-                    .getAgendamentos(LocalDateTime.now()));
+            model.addAttribute("agendamentos", hashDia);
 
 
         }

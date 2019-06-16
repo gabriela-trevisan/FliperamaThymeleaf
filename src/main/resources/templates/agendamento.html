@@ -67,12 +67,12 @@
         <thead>
         <tr>
             <td>
-                <a class=" btn btn-primary" th:href="@{/agendamento/anterior(data=${data.getDataHora()})}"
+                <a class=" btn btn-primary" th:href="@{/agendamento/anterior(data=${data.getData() + 'T00:00'})}"
                    th:text="Anterior"></a>
             </td>
             <td><h3 th:text="${data.getData()}"></h3></td>
             <td>
-                <a class=" btn btn-primary" th:href="@{/agendamento/proximo(data=${data.getDataHora()})}"
+                <a class=" btn btn-primary" th:href="@{/agendamento/proximo(data=${data.getData() + 'T00:00'})}"
                    th:text="Proximo"></a>
             </td>
         </tr>
@@ -100,8 +100,8 @@
 
                 <td th:text="'-'"></td>
                 <td>
-                    <a class="btn btn-primary" th:href="@{/agendar(data=${data.getData() + 'T' + data.formatar(i) + ':00'})} "
-                       th:text="Agendar"></a>
+                    <a class="btn btn-primary" th:href="@{/agendar(data=${data.getData() +
+                    'T' + data.formatar(i) + ':00'})}" th:text="Agendar"></a>
                 </td>
             </div>
 
