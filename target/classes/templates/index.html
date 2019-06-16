@@ -36,41 +36,27 @@
                 <a class="nav-link" href="agendamento">Agendamento</a>
             </li>
 
-            <div th:if="${#session}">
-
-                <div th:if="${#session.getValue('usuario')}">
-                    <li class="nav-item active dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                           th:text="'Bem vindo(a) ' + ${#session.getAttribute('usuario').getNome()}"></a>
-
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/logout" th:text="Logout"></a>
-
-                        </div>
-                    </li>
-                </div>
-
-                <div th:unless="${#session.getValue('usuario')}">
-
-                    <li class="nav-item">
+            <div th:if="${#session} and ${#session.getValue('usuario')}">
 
 
-                        <a class="nav-link" href="login">Login</a>
+                <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                       th:text="'Bem vindo(a) ' + ${#session.getAttribute('usuario').getNome()}"></a>
 
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/logout" th:text="Logout"></a>
 
-                    </li>
-                </div>
+                    </div>
+                </li>
 
 
             </div>
-            <div th:unless="${#session}">
+            <div th:unless="${#session} and ${#session.getValue('usuario')}">
 
                 <li class="nav-item">
 
-
                     <a class="nav-link" href="login">Login</a>
-
 
                 </li>
             </div>

@@ -17,17 +17,11 @@ import javax.servlet.http.HttpSession;
 public class SessionController {
 
 
-
-
     private final UserService userService;
 
     public SessionController(UserService userService) {
         this.userService = userService;
     }
-
-
-
-
 
 
     @ModelAttribute("usuario")

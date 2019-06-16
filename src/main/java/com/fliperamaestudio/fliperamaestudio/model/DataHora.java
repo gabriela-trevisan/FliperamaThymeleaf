@@ -55,7 +55,7 @@ public class DataHora {
 
     public String getData(){
 
-        return formatar(dataHora.getDayOfMonth()) + "/" + formatar(dataHora.getMonthValue());
+        return dataHora.getYear() + "-" + formatar(dataHora.getMonthValue()) + "-" + formatar(dataHora.getDayOfMonth());
     }
 }
 
