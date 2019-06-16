@@ -32,20 +32,34 @@
                 <a class="nav-link" href="agendamento">Agendamento<span class="sr-only">(Página atual)</span></a>
             </li>
 
-
             <div th:if="${#session}">
-                <li class="nav-item active dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="'Bem vindo '
-                       + ${#session.getAttribute('usuario').getNome()}"></a>
 
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/logout" th:text="Logout"></a>
+                <div th:if="${#session.getValue('usuario')}">
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           th:text="'Bem vindo(a) ' + ${#session.getAttribute('usuario').getNome()}"></a>
 
-                    </div>
-                </li>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/logout" th:text="Logout"></a>
+
+                        </div>
+                    </li>
+                </div>
+
+                <div th:unless="${#session.getValue('usuario')}">
+
+                    <li class="nav-item">
+
+
+                        <a class="nav-link" href="login">Login</a>
+
+
+                    </li>
+                </div>
+
+
             </div>
-
             <div th:unless="${#session}">
 
                 <li class="nav-item">
@@ -56,7 +70,6 @@
 
                 </li>
             </div>
-
         </ul>
     </div>
 </nav>

@@ -36,18 +36,44 @@
                 <a class="nav-link" href="agendamento">Agendamento</a>
             </li>
 
-            <li class="nav-item">
+            <div th:if="${#session}">
 
-                <div th:if="${#session}">
-                    <a class="nav-link" href="login" th:text="${#session.getAttribute('usuario').getNome()}"></a>
+                <div th:if="${#session.getValue('usuario')}">
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           th:text="'Bem vindo(a) ' + ${#session.getAttribute('usuario').getNome()}"></a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/logout" th:text="Logout"></a>
+
+                        </div>
+                    </li>
                 </div>
 
-                <div th:unless="${#session}">
+                <div th:unless="${#session.getValue('usuario')}">
+
+                    <li class="nav-item">
+
+
+                        <a class="nav-link" href="login">Login</a>
+
+
+                    </li>
+                </div>
+
+
+            </div>
+            <div th:unless="${#session}">
+
+                <li class="nav-item">
+
+
                     <a class="nav-link" href="login">Login</a>
-                </div>
 
 
-            </li>
+                </li>
+            </div>
 
         </ul>
     </div>
@@ -100,7 +126,7 @@
 
     <div class="row-sm col-md-12 ml-1">
         <img th:src="@{/img/essamerda.png}" class="col-md-4 mb-2 mb-2 " alt=""><img src="resources/img/dream.jpg"
-                                                                                       class="col-md-4 mb-2 " alt="">
+                                                                                    class="col-md-4 mb-2 " alt="">
         <br>
 
 

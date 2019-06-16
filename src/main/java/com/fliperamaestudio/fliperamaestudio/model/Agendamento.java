@@ -15,7 +15,6 @@ import java.time.format.DateTimeFormatter;
 public class Agendamento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "data_hora", nullable = false)
     private LocalDateTime dataHora;
 

@@ -18,11 +18,10 @@ CREATE TABLE cliente(
 );
 
 CREATE TABLE agendamento(
-    id_agendamento serial,
     data_hora TIMESTAMP,
     id_usuario int,
     id_func int,
-    PRIMARY KEY (id_agendamento),
+    PRIMARY KEY (data_hora),
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
     FOREIGN KEY (id_func) REFERENCES usuario(id_usuario)
 );
