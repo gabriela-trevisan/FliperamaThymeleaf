@@ -84,7 +84,8 @@ public class AgendamentoController {
 
             model.addAttribute("passado", false);
             model.addAttribute("data", new DataHora(LocalDateTime.now()));
-            model.addAttribute("agendamentos", hashDia);
+            model.addAttribute("agendamentos",  new AgendamentoDAO()
+                    .getAgendamentos(LocalDateTime.now()));
 
 
         }
