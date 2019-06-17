@@ -28,7 +28,8 @@ public class AgendarController {
         DataHora dataHora = new DataHora(LocalDateTime.parse(data));
 
 
-        if (usuario != null) {
+        if (usuario != null || !( dataHora.getDataHora().toLocalDate().isBefore(LocalDateTime.now().toLocalDate()) ) ) {
+
 
 
             try {

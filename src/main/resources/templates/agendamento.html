@@ -25,7 +25,7 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item ">
+            <li class="nav-item  ">
                 <a class="nav-link" href="/">Página Inicial</a>
             </li>
             <li class="nav-item active btn-primary">
@@ -34,7 +34,7 @@
 
             <div th:if="${#session} and ${#session.getValue('usuario')}">
 
-                <li class="nav-item active dropdown">
+                <li class="nav-item  dropdown btn-outline-secondary ">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                        th:text="'Bem vindo(a) ' + ${#session.getAttribute('usuario').getNome()}"></a>
@@ -63,7 +63,7 @@
 <br>
 
 <div id="conteudo" class="row col-12 ">
-    <table id="tabela" class="table table-dark col-5 offset-1">
+    <table id="tabela" class="table table-dark col-5 offset-1 ">
         <thead>
         <tr>
             <td>
@@ -83,57 +83,104 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="i:${#numbers.sequence(7,21,1)}">
 
 
-            <th scope="row" th:text="${data.formatar(i)} + ':00'"></th>
-            <!-- <div th:each="agendamento : ${agendamentos}">-->
+        <div th:if="${passado}">
+            <tr th:each="i:${#numbers.sequence(7,21,1)}">
 
-            <div th:if="${agendamentos.get(i)}">
 
-                <td th:text="${agendamentos.get(i).getReserva().getNome()}"></td>
+                <th scope="row" th:text="${data.formatar(i)} + ':00'"></th>
+                <!-- <div th:each="agendamento : ${agendamentos}">-->
 
-                <div th:if="${#session} and ${#session.getValue('usuario')} and
+                <div th:if="${agendamentos.get(i)}">
+
+                    <td th:text="${agendamentos.get(i).getReserva().getNome()}"></td>
+
+
+                    <td th:text="Indisponível"></td>
+
+
+                </div>
+
+                <div th:unless="${agendamentos.get(i)}">
+
+                    <td th:text="'-'"></td>
+                    <td th:text="Indisponível"></td>
+                </div>
+
+                <!-- </div>-->
+
+
+                <!--<div th:each="agendamento: ${agendamentos}">
+                    <div th:if="${agendamento.getDataHora().getHour()} == i + ':00'">
+                        <td th:text="${agendamento.getReserva().getNome()}"></td>
+                        <td th:text="Reservado"></td>
+                    </div>
+                    <div th:unless="${agendamento.getDataHora().getHour()} == i">
+                        <td th:text="-"></td>
+                        <td th:text="<button class '=' + 'active btn-primary'>Agendar</button>"></td>
+                    </div>
+
+                </div>-->
+
+
+            </tr>
+        </div>
+
+
+        <div th:unless="${passado}">
+            <tr th:each="i:${#numbers.sequence(7,21,1)}">
+
+
+                <th scope="row" th:text="${data.formatar(i)} + ':00'"></th>
+                <!-- <div th:each="agendamento : ${agendamentos}">-->
+
+                <div th:if="${agendamentos.get(i)}">
+
+                    <td th:text="${agendamentos.get(i).getReserva().getNome()}"></td>
+
+                    <div th:if="${#session} and ${#session.getValue('usuario')} and
                     ${#session.getValue('usuario').getNome() == agendamentos.get(i).getReserva().getNome()}">
-                    <td>
-                        <a class="btn btn-danger" th:href="@{/agendar/cancelar(data=${data.getData() +
+                        <td>
+                            <a class="btn btn-danger" th:href="@{/agendar/cancelar(data=${data.getData() +
                         'T' + data.formatar(i) + ':00'})}" th:text="Desagendar"></a>
+                        </td>
+                    </div>
+                    <div th:unless="${#session} and ${#session.getValue('usuario')} and
+                    ${#session.getValue('usuario').getNome() == agendamentos.get(i).getReserva().getNome()}">
+                        <td th:text="Reservado"></td>
+                    </div>
+
+
+                </div>
+
+                <div th:unless="${agendamentos.get(i)}">
+
+                    <td th:text="'-'"></td>
+                    <td>
+                        <a class="btn btn-success" th:href="@{/agendar(data=${data.getData() +
+                    'T' + data.formatar(i) + ':00'})}" th:text="Agendar"></a>
                     </td>
                 </div>
-                <div th:unless="${#session} and ${#session.getValue('usuario')} and
-                    ${#session.getValue('usuario').getNome() == agendamentos.get(i).getReserva().getNome()}">
-                    <td th:text="Reservado"></td>
-                </div>
+
+                <!-- </div>-->
 
 
-            </div>
+                <!--<div th:each="agendamento: ${agendamentos}">
+                    <div th:if="${agendamento.getDataHora().getHour()} == i + ':00'">
+                        <td th:text="${agendamento.getReserva().getNome()}"></td>
+                        <td th:text="Reservado"></td>
+                    </div>
+                    <div th:unless="${agendamento.getDataHora().getHour()} == i">
+                        <td th:text="-"></td>
+                        <td th:text="<button class '=' + 'active btn-primary'>Agendar</button>"></td>
+                    </div>
 
-            <div th:unless="${agendamentos.get(i)}">
-
-                <td th:text="'-'"></td>
-                <td>
-                    <a class="btn btn-primary" th:href="@{/agendar(data=${data.getData() +
-                    'T' + data.formatar(i) + ':00'})}" th:text="Agendar"></a>
-                </td>
-            </div>
-
-            <!-- </div>-->
-
-
-            <!--<div th:each="agendamento: ${agendamentos}">
-                <div th:if="${agendamento.getDataHora().getHour()} == i + ':00'">
-                    <td th:text="${agendamento.getReserva().getNome()}"></td>
-                    <td th:text="Reservado"></td>
-                </div>
-                <div th:unless="${agendamento.getDataHora().getHour()} == i">
-                    <td th:text="-"></td>
-                    <td th:text="<button class '=' + 'active btn-primary'>Agendar</button>"></td>
-                </div>
-
-            </div>-->
+                </div>-->
 
 
-        </tr>
+            </tr>
+        </div>
 
         </tbody>
     </table>

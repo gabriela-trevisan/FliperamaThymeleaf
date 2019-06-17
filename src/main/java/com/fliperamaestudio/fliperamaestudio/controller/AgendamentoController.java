@@ -42,8 +42,15 @@ public class AgendamentoController {
 */
        // if(dia > 0 && mes >0 && mes < 12 && ano > 2018 ){
         if(!data.isEmpty()){
+
+
             try{
                 DataHora dia = new DataHora(LocalDateTime.parse(data));
+                if( dia.getDataHora().toLocalDate().isBefore(LocalDateTime.now().toLocalDate()) ) {
+                    model.addAttribute("passado", true);
+                }else {
+                    model.addAttribute("passsdo", false);
+                }
 
                 model.addAttribute("data", dia );
                 model.addAttribute("agendamentos", new AgendamentoDAO()
@@ -51,7 +58,7 @@ public class AgendamentoController {
 
 
             }catch (Exception e){
-
+                model.addAttribute("passado", false);
                 model.addAttribute("data", new DataHora(LocalDateTime.now()));
                 model.addAttribute("agendamentos", agendamentoRepository
                         .findAgendamentoByDataHoraBetween(LocalDateTime.now(), LocalDateTime.now().plusDays(1)) );
@@ -72,10 +79,10 @@ public class AgendamentoController {
 
             for(Agendamento agend : listaAgendamento){
                 hashDia.put(agend.getDataHora().getHour(), agend);
-                System.out.println(diaHoje);
+
             }
 
-
+            model.addAttribute("passado", false);
             model.addAttribute("data", new DataHora(LocalDateTime.now()));
             model.addAttribute("agendamentos", hashDia);
 
