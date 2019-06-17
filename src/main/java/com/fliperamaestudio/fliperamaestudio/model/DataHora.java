@@ -57,6 +57,11 @@ public class DataHora {
 
         return dataHora.getYear() + "-" + formatar(dataHora.getMonthValue()) + "-" + formatar(dataHora.getDayOfMonth());
     }
+
+    public String getDataViewUsuario(){
+
+        return formatar(dataHora.getDayOfMonth()) + "/" + formatar(dataHora.getMonthValue()) + "/" + dataHora.getYear();
+    }
 }
 
 

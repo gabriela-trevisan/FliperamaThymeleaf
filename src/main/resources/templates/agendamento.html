@@ -70,7 +70,7 @@
                 <a class=" btn btn-primary" th:href="@{/agendamento/anterior(data=${data.getData() + 'T00:00'})}"
                    th:text="Anterior"></a>
             </td>
-            <td><h3 th:text="${data.getData()}"></h3></td>
+            <td><h3 th:text="${data.getDataViewUsuario()}"></h3></td>
             <td>
                 <a class=" btn btn-primary" th:href="@{/agendamento/proximo(data=${data.getData() + 'T00:00'})}"
                    th:text="Proximo"></a>

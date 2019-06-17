@@ -52,16 +52,23 @@ public class AgendamentoController {
                     model.addAttribute("passsdo", false);
                 }
 
+                var listaAgendamento = agendamentoRepository
+                        .findAgendamentoByDataHoraBetween(dia.getDataHora(), dia.getDataHora().plusDays(1));
+
+                Map<Integer, Agendamento> hashDia = new HashMap<>(15);
+
+                for(Agendamento agend : listaAgendamento){
+                    hashDia.put(agend.getDataHora().getHour(), agend);
+
+                }
+
+
                 model.addAttribute("data", dia );
-                model.addAttribute("agendamentos", new AgendamentoDAO()
-                        .getAgendamentos(dia.getDataHora()));
+                model.addAttribute("agendamentos", hashDia);
 
 
             }catch (Exception e){
-                model.addAttribute("passado", false);
-                model.addAttribute("data", new DataHora(LocalDateTime.now()));
-                model.addAttribute("agendamentos", agendamentoRepository
-                        .findAgendamentoByDataHoraBetween(LocalDateTime.now(), LocalDateTime.now().plusDays(1)) );
+                consultarDiaAtual(model);
 
                 e.printStackTrace();
             }
@@ -70,22 +77,7 @@ public class AgendamentoController {
 
         }else{
 
-            var diaHoje = LocalDateTime.now().minusHours(LocalDateTime.now().getHour());
-
-            var listaAgendamento = agendamentoRepository
-                    .findAgendamentoByDataHoraBetween(diaHoje, diaHoje.plusDays(1));
-
-            Map<Integer, Agendamento> hashDia = new HashMap<>(15);
-
-            for(Agendamento agend : listaAgendamento){
-                hashDia.put(agend.getDataHora().getHour(), agend);
-
-            }
-
-            model.addAttribute("passado", false);
-            model.addAttribute("data", new DataHora(LocalDateTime.now()));
-            model.addAttribute("agendamentos",  new AgendamentoDAO()
-                    .getAgendamentos(LocalDateTime.now()));
+            consultarDiaAtual(model);
 
 
         }
@@ -94,6 +86,23 @@ public class AgendamentoController {
         return "agendamento";
     }
 
+    private void consultarDiaAtual(Model model) {
+        var diaHoje = LocalDateTime.now().minusHours(LocalDateTime.now().getHour());
+
+        var listaAgendamento = agendamentoRepository
+                .findAgendamentoByDataHoraBetween(diaHoje, diaHoje.plusDays(1));
+
+        Map<Integer, Agendamento> hashDia = new HashMap<>(15);
+
+        for(Agendamento agend : listaAgendamento){
+            hashDia.put(agend.getDataHora().getHour(), agend);
+
+        }
+
+        model.addAttribute("passado", false);
+        model.addAttribute("data", new DataHora(LocalDateTime.now()));
+        model.addAttribute("agendamentos",  hashDia);
+    }
 
 
     @GetMapping("/proximo")
