@@ -25,24 +25,10 @@ public class AgendamentoController {
         this.agendamentoRepository = agendamentoRepository;
     }
 
-
     @GetMapping
     public String returnAgendaDia(@RequestParam(defaultValue = "") String data, Model model) {
-      //  System.out.println(LocalDateTime.parse(data));
 
-
-
-       /* System.out.println(dia);
-        System.out.println(Formatador.formmatter.format(dia));*/
-
-        //LocalDateTime atual = LocalDateTime.now();
-
-        /*String data = Formatador.formmatter.format(atual.getMonth().getValue()) + "/" +
-                Formatador.formmatter.format(atual.getDayOfMonth());
-*/
-       // if(dia > 0 && mes >0 && mes < 12 && ano > 2018 ){
         if(!data.isEmpty()){
-
 
             try{
                 DataHora dia = new DataHora(LocalDateTime.parse(data));
@@ -62,10 +48,8 @@ public class AgendamentoController {
 
                 }
 
-
                 model.addAttribute("data", dia );
                 model.addAttribute("agendamentos", hashDia);
-
 
             }catch (Exception e){
                 consultarDiaAtual(model);
@@ -74,14 +58,11 @@ public class AgendamentoController {
             }
 
 
-
         }else{
 
             consultarDiaAtual(model);
 
-
         }
-
 
         return "agendamento";
     }
@@ -108,7 +89,6 @@ public class AgendamentoController {
     @GetMapping("/proximo")
     public String consultarProximoDia(@RequestParam String data){
 
-
         return "redirect:/agendamento?data=" + LocalDateTime.parse(data).plusDays(1);
     }
 
@@ -117,7 +97,6 @@ public class AgendamentoController {
 
         return "redirect:/agendamento?data=" + LocalDateTime.parse(data).minusDays(1);
     }
-
 
 
 }

@@ -9,7 +9,7 @@ import java.time.LocalTime;
 public class DataHora {
 
     private LocalDateTime dataHora;
-    // private LocalDate data;
+
     private static final DecimalFormat formmatter = new DecimalFormat("00");
 
 

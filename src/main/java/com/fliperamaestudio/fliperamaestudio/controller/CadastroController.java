@@ -46,26 +46,6 @@ public class CadastroController {
             return "login";
         }
 
-
-
-
-
-
-
-
-
-        /*var cliente = new Cliente(nome, new BCryptPasswordEncoder().encode(senha), email);
-
-        cliente.setTipo(Tipo.CLI);
-
-        boolean retorno = new ClienteDAO().cadastrarCliente(cliente);
-
-        if (retorno){
-            return "login";
-        }else {
-            return "cadastro";
-        }*/
-
     }
 
 

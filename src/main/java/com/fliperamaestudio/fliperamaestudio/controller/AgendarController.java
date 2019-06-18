@@ -30,8 +30,6 @@ public class AgendarController {
 
         if (usuario != null && !( dataHora.getDataHora().toLocalDate().isBefore(LocalDateTime.now().toLocalDate()) ) ) {
 
-
-
             try {
 
                 model.addAttribute("data", dataHora);
@@ -53,9 +51,7 @@ public class AgendarController {
         }
 
         return "redirect:/login";
-
     }
-
 
     @GetMapping("/cancelar")
     public String cancelarAgendamento(@RequestParam String data,

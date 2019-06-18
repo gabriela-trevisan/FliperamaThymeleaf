@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 @SessionAttributes("usuario")
 public class SessionController {
 
-
     private final UserService userService;
 
     public SessionController(UserService userService) {
@@ -28,11 +27,6 @@ public class SessionController {
     public Usuario usuario(){
         return new Usuario();
     }
-
-    /*@GetMapping("session")
-    public String retornaHome(){
-        return "redirect:/login/autenticado";
-    }*/
 
 
     @GetMapping("/session")
@@ -46,8 +40,6 @@ public class SessionController {
             usuario.setTipo(retorno.getTipo());
             usuario.setIdUsuario(retorno.getIdUsuario());
         }
-
-
 
         return "redirect:/agendamento";
     }

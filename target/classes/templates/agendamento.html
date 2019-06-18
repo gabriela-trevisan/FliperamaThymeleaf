@@ -58,7 +58,6 @@
     </div>
 </nav>
 
-
 <br>
 <br>
 
@@ -84,18 +83,14 @@
         </thead>
         <tbody>
 
-
         <div th:if="${passado}">
             <tr th:each="i:${#numbers.sequence(7,21,1)}">
 
-
                 <th scope="row" th:text="${data.formatar(i)} + ':00'"></th>
-                <!-- <div th:each="agendamento : ${agendamentos}">-->
 
                 <div th:if="${agendamentos.get(i)}">
 
                     <td th:text="${agendamentos.get(i).getReserva().getNome()}"></td>
-
 
                     <td th:text="Indisponível"></td>
 
@@ -107,22 +102,6 @@
                     <td th:text="'-'"></td>
                     <td th:text="Indisponível"></td>
                 </div>
-
-                <!-- </div>-->
-
-
-                <!--<div th:each="agendamento: ${agendamentos}">
-                    <div th:if="${agendamento.getDataHora().getHour()} == i + ':00'">
-                        <td th:text="${agendamento.getReserva().getNome()}"></td>
-                        <td th:text="Reservado"></td>
-                    </div>
-                    <div th:unless="${agendamento.getDataHora().getHour()} == i">
-                        <td th:text="-"></td>
-                        <td th:text="<button class '=' + 'active btn-primary'>Agendar</button>"></td>
-                    </div>
-
-                </div>-->
-
 
             </tr>
         </div>
@@ -163,31 +142,13 @@
                     </td>
                 </div>
 
-                <!-- </div>-->
-
-
-                <!--<div th:each="agendamento: ${agendamentos}">
-                    <div th:if="${agendamento.getDataHora().getHour()} == i + ':00'">
-                        <td th:text="${agendamento.getReserva().getNome()}"></td>
-                        <td th:text="Reservado"></td>
-                    </div>
-                    <div th:unless="${agendamento.getDataHora().getHour()} == i">
-                        <td th:text="-"></td>
-                        <td th:text="<button class '=' + 'active btn-primary'>Agendar</button>"></td>
-                    </div>
-
-                </div>-->
-
-
             </tr>
         </div>
 
         </tbody>
     </table>
 
-
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

@@ -13,27 +13,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-
-
     public UserDetailsServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
 
-
     }
-
-
-
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-
         var usuario = this.userRepository.findByEmail(email)
                 .orElseThrow(()-> new UsernameNotFoundException("Email não encontrado"));
-
-
-        
-
 
         return new UserPrincipal(usuario);
     }
