@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="vanillacalendar.css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/calendario.js}"></script>
 
     <style>
     </style>
@@ -107,6 +108,33 @@
             </a>
         </div>
 
+        <div class="md-col-4 offset-2" id="calendario">
+            <table class="table">
+                <thead>
+                <tr>
+
+                    <th colspan="3" onclick="mesAnterior()"> <</th>
+                    <th colspan="3" id="titulo"></th>
+                    <th colspan="3" onclick="proximoMes()"> ></th>
+                    <script>montaTitulo()</script>
+                </tr>
+                <tr id="dsemana">
+                    <th value="0">D</th>
+                    <th value="1">S</th>
+                    <th value="2">T</th>
+                    <th value="3">Q</th>
+                    <th value="4">Q</th>
+                    <th value="5">S</th>
+                    <th value="6">S</th>
+                </tr>
+                </thead>
+                <tbody>
+                <script>montaMesAtual()</script>
+                </tbody>
+
+            </table>
+        </div>
+
 
     </div>
 
@@ -130,7 +158,7 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="vanillacalendar.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -140,5 +168,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
 </body>
 </html>
