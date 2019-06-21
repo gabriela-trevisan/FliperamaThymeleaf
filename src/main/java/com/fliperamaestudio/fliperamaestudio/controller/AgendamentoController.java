@@ -47,7 +47,7 @@ public class AgendamentoController {
                     hashDia.put(agend.getDataHora().getHour(), agend);
 
                 }
-
+                model.addAttribute("mes", DataHora.formatar(dia.getDataHora().getMonthValue()) + "/" + dia.getDataHora().getYear() );
                 model.addAttribute("data", dia );
                 model.addAttribute("agendamentos", hashDia);
 
@@ -79,7 +79,7 @@ public class AgendamentoController {
             hashDia.put(agend.getDataHora().getHour(), agend);
 
         }
-
+        model.addAttribute("mes", DataHora.formatar(diaHoje.getMonthValue()) + "/" + diaHoje.getYear() );
         model.addAttribute("passado", false);
         model.addAttribute("data", new DataHora(LocalDateTime.now()));
         model.addAttribute("agendamentos",  hashDia);

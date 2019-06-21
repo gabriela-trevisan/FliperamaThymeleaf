@@ -106,8 +106,8 @@ const montaMesAtual =  () =>{
 }
 
 const limpaCalendario = () =>{
-    let table = document.querySelector('table')
-    let corpo = document.querySelector('tbody')
+    let table = document.querySelector('#calendario table')
+    let corpo = document.querySelector('#calendario tbody')
 
     table.removeChild(corpo)
 
