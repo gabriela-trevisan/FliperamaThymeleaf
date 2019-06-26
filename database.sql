@@ -17,6 +17,8 @@ CREATE TABLE cliente(
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)    
 );
 
+
+
 CREATE TABLE agendamento(
     data_hora TIMESTAMP,
     id_usuario int,
