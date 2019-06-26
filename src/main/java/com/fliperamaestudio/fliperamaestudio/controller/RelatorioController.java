@@ -1,6 +1,7 @@
 package com.fliperamaestudio.fliperamaestudio.controller;
 
 import com.fliperamaestudio.fliperamaestudio.model.Agendamento;
+import com.fliperamaestudio.fliperamaestudio.model.DataHora;
 import com.fliperamaestudio.fliperamaestudio.repository.AgendamentoRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ public class RelatorioController {
 
     @GetMapping("/relatorio")
     public String gerarRelatorio(Model model) {
+        var diaHoje = LocalDateTime.now().minusHours(LocalDateTime.now().getHour());
         var inicioMes = LocalDateTime.now().minusDays(LocalDateTime.now().getDayOfMonth());
         var listaMes = agendamentoRepository.findAgendamentoByDataHoraBetween(inicioMes, inicioMes.plusMonths(1));
         int[] diasEnsaiados = {0, 0, 0, 0, 0, 0, 0};
@@ -56,6 +58,7 @@ public class RelatorioController {
         }
 
         model.addAttribute("diasSemana", diasEnsaiados);
+        model.addAttribute("mes", DataHora.formatar(diaHoje.getMonthValue()) + "/" + diaHoje.getYear() );
 
         return "relatorio";
     }
