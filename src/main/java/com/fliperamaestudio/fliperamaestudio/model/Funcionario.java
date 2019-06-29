@@ -11,12 +11,12 @@ import java.util.Currency;
 @NoArgsConstructor
 public class Funcionario extends Usuario{
     private String endereco;
-    private Currency salario;
+    private double salario;
     private String funcao;
 
 
 
-    public Funcionario(String nome, String email, String senha, String endereco, Currency salario, String funcao) {
+    public Funcionario(String nome, String email, String senha, String endereco, double salario, String funcao) {
         super(nome, email, senha);
         this.endereco = endereco;
         this.salario = salario;

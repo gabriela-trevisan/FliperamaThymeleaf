@@ -17,6 +17,15 @@ CREATE TABLE cliente(
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)    
 );
 
+CREATE TABLE funcionario(
+    id_usuario int,
+    endereco varchar(50),
+    salario double precision,
+    funcao varchar(50),
+    PRIMARY KEY (id_usuario),
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+);
+
 
 
 CREATE TABLE agendamento(
@@ -31,7 +40,7 @@ CREATE TABLE agendamento(
  CREATE TABLE faturamento(
      id_faturamento serial,
      dia TIMESTAMP,
-     faturamento_dia FLOAT,
+     faturamento_dia double precision,
      PRIMARY KEY (id_faturamento)
  );
 
