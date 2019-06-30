@@ -44,5 +44,15 @@ CREATE TABLE agendamento(
      PRIMARY KEY (id_faturamento)
  );
 
+CREATE TABLE produto(
+     id_produto serial,
+     nome varchar(50),
+     preco double precision,
+     qtd int,
+     PRIMARY KEY (id_produto)
+ );
+
+
+
 
 COMMIT;

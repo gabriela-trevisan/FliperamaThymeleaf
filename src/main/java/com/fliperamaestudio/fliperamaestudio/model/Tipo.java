@@ -8,7 +8,7 @@ import javax.persistence.Enumerated;
 
 public enum Tipo implements GrantedAuthority {
     SUPER,
-    ADMIN,
+    FUNC,
     CLI;
 
     @Override

@@ -26,6 +26,26 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
+
+
+
+            <th:block th:if="${#session} and ${#session.getValue('usuario').getTipo().ordinal() < 1}">
+                <li class="nav-item  ">
+                    <a class="nav-link" href="cadastroFuncionario" >Cadastrar funcionário</a>
+                </li>
+
+            </th:block>
+
+            <th:block th:if="${#session} and ${#session.getValue('usuario').getTipo().ordinal() < 2}">
+                <li class="nav-item  ">
+                    <a class="nav-link" href="controleEstoque" >Estoque</a>
+                </li>
+
+            </th:block>
+
+
+
+
             <li class="nav-item  ">
                 <a class="nav-link" href="/">Página Inicial</a>
             </li>

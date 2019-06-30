@@ -23,7 +23,7 @@ public class CadastroController {
 
 
     @GetMapping
-    public String returCadastro(){
+    public String returnCadastro(){
         return "cadastro";
     }
 

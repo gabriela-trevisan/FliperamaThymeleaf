@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/iconPreto.png}">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <title>Fliperama Estúdio</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/"><img th:src="@{/img/iconBranco.png}" alt=""> Fliperama Estúdio</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+
+
+            <th:block th:if="${#session} and ${#session.getValue('usuario').getTipo().ordinal() < 1}">
+                <li class="nav-item  ">
+                    <a class="nav-link" href="cadastroFuncionario">Cadastrar funcionário</a>
+                </li>
+
+            </th:block>
+
+            <th:block th:if="${#session} and ${#session.getValue('usuario').getTipo().ordinal() < 2}">
+                <li class="nav-item active btn-primary ">
+                    <a class="nav-link" href="controleEstoque">Estoque</a>
+                </li>
+
+            </th:block>
+
+
+            <li class="nav-item  ">
+                <a class="nav-link" href="/">Página Inicial</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="agendamento">Agendamento<span class="sr-only">(Página atual)</span></a>
+            </li>
+
+            <div th:if="${#session} and ${#session.getValue('usuario')}">
+
+                <li class="nav-item  dropdown ">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                       th:text="'Bem vindo(a) ' + ${#session.getAttribute('usuario').getNome()}"></a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/logout" th:text="Logout"></a>
+
+                    </div>
+                </li>
+
+            </div>
+            <div th:unless="${#session} and ${#session.getValue('usuario')}">
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="login">Login</a>
+
+                </li>
+            </div>
+        </ul>
+    </div>
+</nav>
+
+
+<br>
+
+<div class=" offset-3 col-md-6">
+
+    <form method="post" th:action="@{/controleEstoque/cadastroProduto}">
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" aria-describedby="emailHelp"
+                   placeholder="Entre com o produto">
+        </div>
+        <div class="form-group">
+            <label for="preco">Preço</label>
+            <input type="number" class="form-control" id="preco" name="preco" placeholder="Entre com o preço">
+        </div>
+        <div class="form-group">
+            <label for="qtd">Quantidade</label>
+            <input type="number" class="form-control" id="qtd" name="qtd" placeholder="Entre com a quantidade">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <a class="btn btn-danger" href="controleEstoque">Cancelar</a>
+
+    </form>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
