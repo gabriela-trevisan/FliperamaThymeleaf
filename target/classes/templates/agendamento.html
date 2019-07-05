@@ -28,30 +28,30 @@
         <ul class="navbar-nav">
 
 
-
-            <th:block th:if="${#session} and ${#session.getValue('usuario').getTipo().ordinal() < 1}">
-                <li class="nav-item  ">
-                    <a class="nav-link" href="cadastroFuncionario" >Cadastrar funcionário</a>
-                </li>
-
-            </th:block>
-
-            <th:block th:if="${#session} and ${#session.getValue('usuario').getTipo().ordinal() < 2}">
-                <li class="nav-item  ">
-                    <a class="nav-link" href="controleEstoque" >Estoque</a>
-                </li>
-
-            </th:block>
-
-
-
-
             <li class="nav-item  ">
                 <a class="nav-link" href="/">Página Inicial</a>
             </li>
             <li class="nav-item active btn-primary">
                 <a class="nav-link" href="agendamento">Agendamento<span class="sr-only">(Página atual)</span></a>
             </li>
+
+
+            <th:block th:if="${#session} and ${#session.getValue('usuario')}">
+                <th:block th:if="${#session.getValue('usuario').getTipo().ordinal() < 1}">
+                    <li class="nav-item  ">
+                        <a class="nav-link" href="cadastroFuncionario">Cadastrar funcionário</a>
+                    </li>
+
+                </th:block>
+
+                <th:block th:if="${#session.getValue('usuario').getTipo().ordinal() < 2}">
+                    <li class="nav-item  ">
+                        <a class="nav-link" href="controleEstoque">Estoque</a>
+                    </li>
+
+                </th:block>
+            </th:block>
+
 
             <div th:if="${#session} and ${#session.getValue('usuario')}">
 

@@ -40,6 +40,8 @@ public class SessionController {
             usuario.setTipo(retorno.getTipo());
             usuario.setIdUsuario(retorno.getIdUsuario());
         }
+        System.out.println(usuario.getTipo().ordinal());
+
 
         return "redirect:/agendamento";
     }

@@ -46,4 +46,33 @@ public class EstoqueController {
         return "redirect:/controleEstoque";
 
     }
+
+    @PostMapping("/atualizaEstoque")
+    public String atualizaEstoque(@RequestParam int id,
+                                  @RequestParam int qtd){
+
+        var retorno = produtoRepository.findById(id);
+
+        var produto = retorno.get();
+
+        produto.setQtd(qtd);
+
+        produtoRepository.deleteById(id);
+
+        produtoRepository.save(produto);
+
+
+
+
+        return "redirect:/controleEstoque";
+    }
+
+
+    @PostMapping("/excluirItem")
+    public String excluirItem(@RequestParam int id){
+
+        produtoRepository.deleteById(id);
+
+        return "redirect:/controleEstoque";
+    }
 }

@@ -1,7 +1,5 @@
 package com.fliperamaestudio.fliperamaestudio.controller;
 
-
-import com.fliperamaestudio.fliperamaestudio.model.Cliente;
 import com.fliperamaestudio.fliperamaestudio.model.Tipo;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 import com.fliperamaestudio.fliperamaestudio.service.UserService;
@@ -12,33 +10,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/cadastro")
-public class CadastroController {
+@RequestMapping("cadastroSuper")
+public class CadastroSuper {
 
     private final UserService userService;
 
-    public CadastroController(UserService userService) {
+    public CadastroSuper(UserService userService) {
         this.userService = userService;
     }
 
-
     @GetMapping
-    public String returnCadastro() {
-        return "cadastro";
+    public String retornaSuper() {
+        return "cadastroSuper";
     }
 
     @PostMapping
-    public String cadastraUsuario(@RequestParam String nome,
-                                  @RequestParam String email,
-                                  @RequestParam String senha,
-                                  @RequestParam String telefone) {
+    public String cadastraSuper(@RequestParam String nome,
+                                @RequestParam String email,
+                                @RequestParam String senha) {
 
 
-        var cliente = new Cliente(nome, email, senha, telefone);
+        var usuario = new Usuario(nome, email, senha);
 
-        cliente.setTipo(Tipo.CLI);
 
-        Usuario retorno = userService.save(cliente);
+        usuario.setTipo(Tipo.SUPER);
+
+        Usuario retorno = userService.save(usuario);
 
         if (retorno == null) {
             return "cadastro";
@@ -47,8 +44,5 @@ public class CadastroController {
         }
 
     }
-
-
-
 
 }

@@ -28,27 +28,30 @@
         <ul class="navbar-nav">
 
 
-            <th:block th:if="${#session} and ${#session.getValue('usuario').getTipo().ordinal() < 1}">
-                <li class="nav-item  ">
-                    <a class="nav-link" href="cadastroFuncionario">Cadastrar funcionário</a>
-                </li>
-
-            </th:block>
-
-            <th:block th:if="${#session} and ${#session.getValue('usuario').getTipo().ordinal() < 2}">
-                <li class="nav-item  ">
-                    <a class="nav-link active btn-primary" href="controleEstoque">Estoque</a>
-                </li>
-
-            </th:block>
-
-
             <li class="nav-item  ">
                 <a class="nav-link" href="/">Página Inicial</a>
             </li>
-            <li class="nav-item ">
+            <li class="nav-item active btn-primary">
                 <a class="nav-link" href="agendamento">Agendamento<span class="sr-only">(Página atual)</span></a>
             </li>
+
+
+            <th:block th:if="${#session} and ${#session.getValue('usuario')}">
+                <th:block th:if="${#session.getValue('usuario').getTipo().ordinal() < 1}">
+                    <li class="nav-item  ">
+                        <a class="nav-link" href="cadastroFuncionario">Cadastrar funcionário</a>
+                    </li>
+
+                </th:block>
+
+                <th:block th:if="${#session.getValue('usuario').getTipo().ordinal() < 2}">
+                    <li class="nav-item  ">
+                        <a class="nav-link" href="controleEstoque">Estoque</a>
+                    </li>
+
+                </th:block>
+            </th:block>
+
 
             <div th:if="${#session} and ${#session.getValue('usuario')}">
 
@@ -76,32 +79,66 @@
     </div>
 </nav>
 
-
 <br>
 
 <div class="row col-12 ">
     <table id="tabela" class="table table-dark col-5 offset-1 ">
         <thead>
         <tr>
-            <td scope="col"><b>Produto</b></td>
-            <td scope="col"><b>Preço</b></td>
-            <td scope="col"><b>Quantidade</b></td>
-            <td scope="col" ><a class="btn btn-primary" href="controleEstoque/cadastroProduto">Cadastrar Produto</a></td>
+            <td><b>Produto</b></td>
+            <td ><b>Preço</b></td>
+            <td ><b>Quantidade</b></td>
+            <td ><a class="btn btn-primary" href="controleEstoque/cadastroProduto">Cadastrar Produto</a></td>
         </tr>
         </thead>
         <tbody>
-            <th:block th:if="${estoque}">
-                <tr th:each="item: ${estoque}">
-                    <td th:text="${item.getNome()}"></td>
-                    <td th:text="${item.getPreco()}"></td>
-                    <td th:text="${item.getQtd()}"></td>
+        <th:block th:if="${estoque}">
+            <tr th:each="item: ${estoque}">
+                <td th:text="${item.getNome()}"></td>
+                <td th:text="${item.getPreco()}">
+
+                </td>
+                <form method="post" th:action="@{/controleEstoque/atualizaEstoque}" >
                     <td>
-                        <a class="btn btn-danger" th:href="@{/controleEstoque/remover(id=${item.getIdProduto()})}" th:text="'-'"></a>
-                        <a class="btn btn-success" th:href="@{/controleEstoque/adiconar(id=${item.getIdProduto()})}" th:text="'+'"></a>
+
+                        <div class="form-group col-md-12" >
+                            <input type="number" id="qtd" name="qtd" th:value="${item.getQtd()}" class="form-control">
+                            <input type="text" id="id" name="id" hidden th:value="${item.getIdProduto()}">
+                        </div>
+
                     </td>
 
-                </tr>
-            </th:block>
+                    <td>
+                        <div>
+
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
+                    </td>
+                </form>
+
+
+                <form method="post" th:action="@{/controleEstoque/excluirItem}">
+                    <td>
+                        <input type="text" id="id" name="id" hidden th:value="${item.getIdProduto()}" >
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+
+                    </td>
+
+                </form>
+                <!--<td>
+                    <a class="btn btn-danger" th:href="@{/controleEstoque/remover(id=${item.getIdProduto()})}"
+                       th:text="'-'"></a>
+                    <a class="btn btn-success" th:href="@{/controleEstoque/adiconar(id=${item.getIdProduto()})}"
+                       th:text="'+'"></a>
+                </td>
+
+
+
+-->
+
+
+            </tr>
+        </th:block>
 
 
         </tbody>
