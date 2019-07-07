@@ -29,6 +29,10 @@ public class UserService {
         return userRepository.save(usuario);
     }
 
+    public void delete(Usuario usuario){
+        userRepository.delete(usuario);
+    }
+
     public Usuario findEmail(String email){
         return userRepository.findByEmail(email).orElse(null);
     }

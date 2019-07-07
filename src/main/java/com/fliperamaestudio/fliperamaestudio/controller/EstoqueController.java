@@ -4,10 +4,7 @@ import com.fliperamaestudio.fliperamaestudio.model.Produto;
 import com.fliperamaestudio.fliperamaestudio.repository.ProdutoRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("controleEstoque")
@@ -47,29 +44,25 @@ public class EstoqueController {
 
     }
 
-    @PostMapping("/atualizaEstoque")
+    @PutMapping("/atualizaEstoque")
     public String atualizaEstoque(@RequestParam int id,
-                                  @RequestParam int qtd){
+                                  @RequestParam(defaultValue = "0") int venda,
+                                  @RequestParam(defaultValue = "0") int entrada) {
 
         var retorno = produtoRepository.findById(id);
 
         var produto = retorno.get();
 
-        produto.setQtd(qtd);
-
-        produtoRepository.deleteById(id);
+        produto.setQtd( produto.getQtd()-venda + entrada);
 
         produtoRepository.save(produto);
-
-
-
 
         return "redirect:/controleEstoque";
     }
 
 
-    @PostMapping("/excluirItem")
-    public String excluirItem(@RequestParam int id){
+    @DeleteMapping("/excluirItem")
+    public String excluirItem(@RequestParam int id) {
 
         produtoRepository.deleteById(id);
 

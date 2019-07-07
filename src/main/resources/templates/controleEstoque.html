@@ -88,7 +88,9 @@
             <td scope="col"><b>Produto</b></td>
             <td scope="col"><b>Preço</b></td>
             <td scope="col"><b>Quantidade</b></td>
-            <td scope="col"><a class="btn btn-primary" href="controleEstoque/cadastroProduto">Cadastrar Produto</a></td>
+            <td scope="col"><b>Entrada</b></td>
+            <td scope="col"><b>Numero vendido</b></td>
+            <td scope="col"><a class="btn btn-primary" href="controleEstoque/cadastroProduto">Novo Produto</a></td>
         </tr>
         </thead>
         <tbody>
@@ -96,12 +98,23 @@
             <tr th:each="item: ${estoque}">
                 <td th:text="${item.getNome()}"></td>
                 <td th:text="${item.getPreco()}"></td>
-                <form method="post" th:action="@{/controleEstoque/atualizaEstoque}" >
+                <td th:text="${item.getQtd()}"></td>
+                <form th:method="put" th:action="@{/controleEstoque/atualizaEstoque}" >
                     <td>
 
-                        <div class="form-group col-md-12" >
-                            <input type="number" id="qtd" name="qtd" th:value="${item.getQtd()}" class="form-control">
-                            <input type="text" id="id" name="id" hidden th:value="${item.getIdProduto()}">
+                        <div class="form-group " >
+                            <input type="number" id="entrada" name="entrada" class="form-control col-xs-4">
+                            <input type="text"  name="id" hidden th:value="${item.getIdProduto()}">
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="form-group " >
+                            <input type="number" id="venda" name="venda" th:max="${item.getQtd()}" class="form-control col-xs-4">
+
                         </div>
 
                     </td>
@@ -115,7 +128,7 @@
                 </form>
 
 
-                <form method="post" th:action="@{/controleEstoque/excluirItem}">
+                <form th:method="delete" th:action="@{/controleEstoque/excluirItem}">
                     <td>
                         <input type="text" id="id" name="id" hidden th:value="${item.getIdProduto()}" >
                         <button type="submit" class="btn btn-danger">Excluir</button>
