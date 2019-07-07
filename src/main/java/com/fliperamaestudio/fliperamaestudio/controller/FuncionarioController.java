@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -36,7 +38,7 @@ public class FuncionarioController {
                                        @RequestParam String endereco,
                                        @RequestParam double salario,
                                        @RequestParam String funcao,
-                                       @RequestParam String senha){
+                                       @RequestParam(required = false) String senha){
 
 
         var funcionario = new Funcionario(nome, email, senha, endereco, salario, funcao);
@@ -54,16 +56,27 @@ public class FuncionarioController {
 
     }
 
+    @GetMapping("listaFuncionarios")
+    public String listarFuncionarios(Model model){
+
+        List<Funcionario> funcionarios = funcionarioRepository.findAll();
+
+        model.addAttribute("funcionarios", funcionarios);
+
+        return "listaFuncionarios";
+    }
 
 
-    @GetMapping("/editarFuncionario")
-    public String returnEditarFuncionario(@RequestParam(defaultValue = "2") int id, Model model){
+
+    @PutMapping("/editarFuncionario")
+    public String returnEditarFuncionario(@RequestParam int id, Model model){
 
         Optional<Funcionario> funcionario = funcionarioRepository.findById(id);
 
 
 
-        model.addAttribute("funcionario", funcionario);
+        model.addAttribute("funcionario", funcionario.get());
+
 
         return "editarFuncionario";
     }
@@ -72,16 +85,19 @@ public class FuncionarioController {
     public String editarFuncionario(@RequestParam String nome,
                                     @RequestParam String email,
                                     @RequestParam String endereco,
+                                    @RequestParam int id,
                                     @RequestParam double salario,
                                     @RequestParam String funcao,
                                     @RequestParam String senha){
 
 
         var funcionario = new Funcionario(nome, email, senha, endereco, salario, funcao);
+        funcionario.setIdUsuario(id);
+        System.out.println(salario);
 
         userService.save(funcionario);
 
-        return "redirect:/editarFuncionario";
+        return "redirect:listaFuncionarios";
     }
 
     @DeleteMapping("/deletarFuncionario")

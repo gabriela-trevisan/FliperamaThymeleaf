@@ -17,67 +17,7 @@
     <title>Fliperama Estúdio</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/"><img th:src="@{/img/iconBranco.png}" alt=""> Fliperama Estúdio</a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-
-
-            <li class="nav-item  ">
-                <a class="nav-link" href="/">Página Inicial</a>
-            </li>
-            <li class="nav-item active btn-primary">
-                <a class="nav-link" href="agendamento">Agendamento<span class="sr-only">(Página atual)</span></a>
-            </li>
-
-
-            <th:block th:if="${#session} and ${#session.getValue('usuario')}">
-                <th:block th:if="${#session.getValue('usuario').getTipo().ordinal() < 1}">
-                    <li class="nav-item  ">
-                        <a class="nav-link" href="cadastroFuncionario">Cadastrar funcionário</a>
-                    </li>
-
-                </th:block>
-
-                <th:block th:if="${#session.getValue('usuario').getTipo().ordinal() < 2}">
-                    <li class="nav-item  ">
-                        <a class="nav-link" href="controleEstoque">Estoque</a>
-                    </li>
-
-                </th:block>
-            </th:block>
-
-
-            <div th:if="${#session} and ${#session.getValue('usuario')}">
-
-                <li class="nav-item  dropdown ">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                       th:text="'Bem vindo(a) ' + ${#session.getAttribute('usuario').getNome()}"></a>
-
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/logout" th:text="Logout"></a>
-
-                    </div>
-                </li>
-
-            </div>
-            <div th:unless="${#session} and ${#session.getValue('usuario')}">
-
-                <li class="nav-item">
-
-                    <a class="nav-link" href="login">Login</a>
-
-                </li>
-            </div>
-        </ul>
-    </div>
-</nav>
+<div th:insert="navbar :: header-estoque"></div>
 
 <br>
 

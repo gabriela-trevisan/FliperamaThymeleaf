@@ -16,49 +16,29 @@
     <title>Fliperama Estúdio</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/"><img th:src="@{/img/iconBranco.png}" alt=""> Fliperama Estúdio</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item ">
-                <a class="nav-link" href="/">Página Inicial</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="agendamento">Agendamento</a>
-            </li>
-
-            <li class="nav-item ">
-                <a class="nav-link" href="login">Login</a>
-            </li>
-
-        </ul>
-    </div>
-</nav>
+<div th:insert="navbar"></div>
 
 
 <br>
 
 <div class=" offset-3 col-md-6">
 
-    <form method="post" th:action="@{/cadastro}">
+    <form th:method="put" th:action="@{/cliente/editar}">
         <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" class="form-control" id="nome" name="nome" aria-describedby="emailHelp" placeholder="Entre com o seu nome">
+            <input type="text" class="form-control" id="nome" name="nome"  th:value="${cliente.getNome()}">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Entre com o seu email">
+            <input type="text" class="form-control" id="email" name="email" th:value="${cliente.getEmail()}">
         </div>
         <div class="form-group">
             <label for="telefone">Telefone</label>
-            <input type="number" class="form-control" id="telefone" name="telefone" placeholder="Entre com o telefone">
+            <input type="number" class="form-control" id="telefone" name="telefone" th:value="${cliente.getTelefone()}" >
         </div>
         <div class="form-group">
             <label for="senha">Senha</label>
-            <input type="password" class="form-control" id="senha" name="senha" placeholder="Entre com a senha">
+            <input type="password" class="form-control" id="senha" name="senha">
         </div>
         <!--<div class="form-group">
             <label for="">Confirmar Senha</label>
