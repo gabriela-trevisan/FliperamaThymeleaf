@@ -37,25 +37,6 @@
 
     function drawChart() {
 
-        var data1 = google.visualization.arrayToDataTable([
-            ['Produto', 'qtd'],
-            ['Copper', 8.94,],            // RGB value
-            ['Silver', 10.49],            // English color name
-            ['Gold', 19.30],
-            ['Platinum', 21.45], // CSS-style declaration
-        ]);
-
-
-
-
-
-
-
-
-
-
-
-
 
         var data = google.visualization.arrayToDataTable([
             ['Dias', 'Horas por dia'],
@@ -74,12 +55,9 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-        var chart1 = new google.visualization.BarChart(document.getElementById('barchart'));
 
 
         chart.draw(data, options);
-        chart1.draw(data1, options);
-
 
 
         document.querySelector('#info').remove()
@@ -87,43 +65,68 @@
 </script>
 <div class="row">
     <div id="piechart" style="width: 900px; height: 500px;"></div>
-    <div id="barchart" style="width: 900px; height: 500px;"></div>
-    <div class="md-col-4 offset-3" id="calendario">
-        <table class="table">
+
+
+</div>
+
+<div class="row">
+
+
+    <div>
+        <table class="table offset-6">
             <thead>
             <tr>
 
-                <th colspan="7">
-                    <div class="row">
-                        <button class="col-md-3" onclick="mesAnterior()"> &lt;</button>
-                        <span class="col-md-6 text-center" id="titulo" th:text="${mes}"></span>
-                        <button class="col-md-3 " onclick="proximoMes()"> &gt;</button>
-                    </div>
-                </th>
+                <td>Tipo</td>
+                <td>Cadastros</td>
 
-                <!--<th colspan="3" onclick="mesAnterior()"> <</th>
-                <th colspan="3" id="titulo"></th>
-                <th colspan="3" onclick="proximoMes()"> ></th>-->
-
-            </tr>
-            <tr id="dsemana">
-                <th value="0">D</th>
-                <th value="1">S</th>
-                <th value="2">T</th>
-                <th value="3">Q</th>
-                <th value="4">Q</th>
-                <th value="5">S</th>
-                <th value="6">S</th>
             </tr>
             </thead>
             <tbody>
-            <script>montaMesAtual()</script>
+            <th:block th:each="usuario : ${cadastrados}">
+                <th:block th:if="${usuario.getTipo().ordinal() > 1}">
+                    <tr>
+                        <td th:text="Cliente"></td>
+                        <td th:text="${usuario.getNome()}"></td>
+                    </tr>
+
+                </th:block>
+                <th:block th:unless="${usuario.getTipo().ordinal() > 1}">
+                    <tr>
+                        <td th:text="Funcionario"></td>
+                        <td th:text="${usuario.getNome()}"></td>
+                    </tr>
+                </th:block>
+
+            </th:block>
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <div>
+        <table class="table offset-10">
+            <thead>
+            <tr>
+                <td th:text="Produto"></td>
+                <td th:text="Quantidade"></td>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="produto : ${produtos}">
+                <tr>
+                    <td th:text="${produto.getValue().getNome()}"></td>
+                    <td th:text="${produto.getValue().getQtd()}"></td>
+                </tr>
+
+            </th:block>
             </tbody>
 
         </table>
     </div>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

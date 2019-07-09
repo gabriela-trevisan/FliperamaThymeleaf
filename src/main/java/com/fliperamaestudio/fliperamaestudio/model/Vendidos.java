@@ -26,4 +26,9 @@ public class Vendidos {
         this.nome = nome;
         this.qtd = qtd;
     }
+
+    public void somaQtd(int qtd){
+        this.qtd += qtd;
+
+    }
 }

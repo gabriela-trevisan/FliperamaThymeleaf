@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/usuario/*").hasAnyRole()
+                .antMatchers("/relatorio/").hasAnyRole("SUPER")
                 .antMatchers("/agendamento/agendar").hasAnyRole()
                 .antMatchers("/**").permitAll()
                 .antMatchers("/cadastrar").permitAll()
