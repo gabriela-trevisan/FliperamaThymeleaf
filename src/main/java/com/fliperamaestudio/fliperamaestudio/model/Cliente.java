@@ -23,6 +23,11 @@ public class Cliente extends Usuario{
         this.telefone = telefone;
 
     }
+    public Cliente(String nome, String email, String telefone) {
+        super(nome, email);
+        this.telefone = telefone;
+
+    }
 
 
 }

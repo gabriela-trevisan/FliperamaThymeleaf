@@ -1,18 +1,24 @@
 package com.fliperamaestudio.fliperamaestudio.controller;
 
 import com.fliperamaestudio.fliperamaestudio.model.Produto;
+import com.fliperamaestudio.fliperamaestudio.model.Vendidos;
 import com.fliperamaestudio.fliperamaestudio.repository.ProdutoRepository;
+import com.fliperamaestudio.fliperamaestudio.repository.VendidosRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("controleEstoque")
 public class EstoqueController {
 
+    private final VendidosRepository vendidosRepository;
     private final ProdutoRepository produtoRepository;
 
-    public EstoqueController(ProdutoRepository produtoRepository) {
+    public EstoqueController(VendidosRepository vendidosRepository, ProdutoRepository produtoRepository) {
+        this.vendidosRepository = vendidosRepository;
         this.produtoRepository = produtoRepository;
     }
 
@@ -55,7 +61,13 @@ public class EstoqueController {
 
         produto.setQtd( produto.getQtd()-venda + entrada);
 
+        var vendidos = new Vendidos(LocalDateTime.now(), produto.getNome(), venda);
+
+        vendidosRepository.save(vendidos);
+
         produtoRepository.save(produto);
+
+
 
         return "redirect:/controleEstoque";
     }

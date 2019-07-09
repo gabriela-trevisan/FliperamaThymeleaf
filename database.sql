@@ -49,8 +49,17 @@ CREATE TABLE produto(
      nome varchar(50),
      preco double precision,
      qtd int,
+
      PRIMARY KEY (id_produto)
  );
+
+CREATE TABLE vendidos(
+    nome varchar(50),
+    qtd int,
+    data TIMESTAMP primary key
+
+
+);
 
 
 

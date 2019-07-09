@@ -81,7 +81,7 @@ public class FuncionarioController {
         return "editarFuncionario";
     }
 
-    @PutMapping("/salvarFuncionario")
+    @PostMapping("/salvarFuncionario")
     public String editarFuncionario(@RequestParam String nome,
                                     @RequestParam String email,
                                     @RequestParam String endereco,

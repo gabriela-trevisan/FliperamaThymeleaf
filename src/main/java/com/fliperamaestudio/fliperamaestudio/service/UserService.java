@@ -29,6 +29,7 @@ public class UserService {
         return userRepository.save(usuario);
     }
 
+
     public void delete(Usuario usuario){
         userRepository.delete(usuario);
     }

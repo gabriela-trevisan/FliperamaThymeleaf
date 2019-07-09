@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/iconPreto.png}">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" th:src="@{/js/calendario.js}"></script>
+    <title>Fliperama Estúdio</title>
+</head>
+<body>
+
+
+<div th:insert="navbar :: header-agendamento"></div>
+
+<br>
+<br>
+
+<div id="conteudo" class="row col-12 ">
+    <table id="tabela" class="table table-dark col-5 offset-1 ">
+        <thead>
+        <tr>
+            <td>
+                <a class=" btn btn-primary" th:href="@{/agendamento/anterior(data=${data.getData() + 'T00:00'})}"
+                   th:text="Anterior"></a>
+            </td>
+            <td><h3 th:text="${data.getDataViewUsuario()}"></h3></td>
+            <td>
+                <a class=" btn btn-primary" th:href="@{/agendamento/proximo(data=${data.getData() + 'T00:00'})}"
+                   th:text="Proximo"></a>
+            </td>
+        </tr>
+        <tr>
+            <td scope="col"><b>Hora</b></td>
+            <td scope="col"><b>banda</b></td>
+            <td><b>Disponibilidade</b></td>
+        </tr>
+        </thead>
+        <tbody>
+
+        <div th:if="${passado}">
+            <tr th:each="i:${#numbers.sequence(7,21,1)}">
+
+                <th scope="row" th:text="${data.formatar(i)} + ':00'"></th>
+
+                <div th:if="${agendamentos.get(i)}">
+
+                    <td th:text="${agendamentos.get(i).getReserva().getNome()}"></td>
+
+                    <td th:text="Indisponível"></td>
+
+
+                </div>
+
+                <div th:unless="${agendamentos.get(i)}">
+
+                    <td th:text="'-'"></td>
+                    <td th:text="Indisponível"></td>
+                </div>
+
+            </tr>
+        </div>
+
+
+        <div th:unless="${passado}">
+            <tr th:each="i:${#numbers.sequence(7,21,1)}">
+
+
+                <th scope="row" th:text="${data.formatar(i)} + ':00'"></th>
+                <!-- <div th:each="agendamento : ${agendamentos}">-->
+
+                <div th:if="${agendamentos.get(i)}">
+
+                    <td th:text="${agendamentos.get(i).getReserva().getNome()}"></td>
+
+                    <div th:if="${#session} and ${#session.getValue('usuario')} and
+                    ${#session.getValue('usuario').getNome() == agendamentos.get(i).getReserva().getNome()}">
+                        <td>
+                            <a class="btn btn-danger" th:href="@{/agendar/cancelar(data=${data.getData() +
+                        'T' + data.formatar(i) + ':00'})}" th:text="Desagendar"></a>
+                        </td>
+                    </div>
+                    <div th:unless="${#session} and ${#session.getValue('usuario')} and
+                    ${#session.getValue('usuario').getNome() == agendamentos.get(i).getReserva().getNome()}">
+                        <td th:text="Reservado"></td>
+                    </div>
+
+
+                </div>
+
+                <div th:unless="${agendamentos.get(i)}">
+
+                    <td th:text="'-'"></td>
+                    <td>
+                        <a class="btn btn-success" th:href="@{/agendar(data=${data.getData() +
+                    'T' + data.formatar(i) + ':00'})}" th:text="Agendar"></a>
+                    </td>
+                </div>
+
+            </tr>
+        </div>
+
+        </tbody>
+    </table>
+
+
+    <div class="md-col-4 offset-2" id="calendario">
+        <table class="table">
+            <thead>
+            <tr>
+
+                <th colspan="7">
+                    <div class="row">
+                        <button class="col-md-3 btn btn-primary" onclick="mesAnterior()"> &lt;</button>
+                        <span class="col-md-6 text-center" id="titulo" th:text="${mes}"></span>
+                        <button class="col-md-3 btn btn-primary" onclick="proximoMes()"> &gt;</button>
+                    </div>
+                </th>
+
+
+            </tr>
+            <tr id="dsemana">
+                <th value="0">D</th>
+                <th value="1">S</th>
+                <th value="2">T</th>
+                <th value="3">Q</th>
+                <th value="4">Q</th>
+                <th value="5">S</th>
+                <th value="6">S</th>
+            </tr>
+            </thead>
+            <tbody>
+            <script>montaMesAtual()</script>
+            </tbody>
+
+        </table>
+    </div>
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

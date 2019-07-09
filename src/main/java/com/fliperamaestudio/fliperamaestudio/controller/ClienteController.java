@@ -35,7 +35,7 @@ public class ClienteController {
     }
 
 
-    @PutMapping("editar")
+    @PostMapping("editar")
     public String cadastraUsuario(@RequestParam String nome,
                                   @RequestParam String email,
                                   @RequestParam(required = false) String senha,
@@ -43,11 +43,19 @@ public class ClienteController {
                                   @SessionAttribute("usuario") Usuario usuarioSession ) {
 
 
-        var cliente = new Cliente(nome, email, senha, telefone);
-        cliente.setIdUsuario(usuarioSession.getIdUsuario());
+
+            var cliente = new Cliente(nome, email, senha, telefone);
+            cliente.setIdUsuario(usuarioSession.getIdUsuario());
+            cliente.setTipo(Tipo.CLI);
+            Usuario retorno = userService.save(cliente);
 
 
-        Usuario retorno = userService.save(cliente);
+
+
+
+
+
+
 
         return "redirect:editarCliente";
 
