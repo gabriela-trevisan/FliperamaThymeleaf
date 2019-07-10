@@ -1,6 +1,5 @@
 package com.fliperamaestudio.fliperamaestudio.controller;
 
-import com.fliperamaestudio.fliperamaestudio.dao.AgendamentoDAO;
 import com.fliperamaestudio.fliperamaestudio.model.Agendamento;
 import com.fliperamaestudio.fliperamaestudio.model.DataHora;
 import com.fliperamaestudio.fliperamaestudio.model.Usuario;

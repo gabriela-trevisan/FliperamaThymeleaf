@@ -37,12 +37,6 @@ CREATE TABLE agendamento(
     FOREIGN KEY (id_func) REFERENCES usuario(id_usuario)
 );
  
- CREATE TABLE faturamento(
-     id_faturamento serial,
-     dia TIMESTAMP,
-     faturamento_dia double precision,
-     PRIMARY KEY (id_faturamento)
- );
 
 CREATE TABLE produto(
      id_produto serial,
@@ -60,8 +54,6 @@ CREATE TABLE vendidos(
 
 
 );
-
-
 
 
 COMMIT;

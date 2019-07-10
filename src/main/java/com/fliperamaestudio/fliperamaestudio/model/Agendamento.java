@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.swing.text.DateFormatter;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Data
 @Entity
@@ -19,7 +17,7 @@ public class Agendamento {
     private LocalDateTime dataHora;
 
 
-    //@Column(nullable = false, name = "id_usuario")
+
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario reserva;

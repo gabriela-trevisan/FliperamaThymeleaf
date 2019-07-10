@@ -1,7 +1,6 @@
 package com.fliperamaestudio.fliperamaestudio.security;
 
 
-import com.fliperamaestudio.fliperamaestudio.model.Usuario;
 import com.fliperamaestudio.fliperamaestudio.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

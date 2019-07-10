@@ -1,6 +1,5 @@
 package com.fliperamaestudio.fliperamaestudio.model;
 
-import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
