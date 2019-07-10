@@ -33,13 +33,14 @@ public class RelatorioController {
     }
 
     @GetMapping("/relatorio")
-    public String gerarRelatorio(Model model, @RequestParam(defaultValue = "") String dataConsulta) {
+    public String gerarRelatorio(Model model, @RequestParam(defaultValue = "") String ano, @RequestParam(defaultValue = "0") int mes) {
         LocalDateTime data;
 
-        if(dataConsulta.isEmpty()){
+        if(ano.isEmpty()){
             data = LocalDateTime.now().minusDays(LocalDateTime.now().getDayOfMonth());
         }else {
-            data = LocalDateTime.parse(dataConsulta);
+            data = LocalDateTime.parse(ano + "-" + DataHora.formatar(mes -1)+"-"+"01T00:00");
+
         }
 
 
@@ -108,7 +109,7 @@ public class RelatorioController {
 
         model.addAttribute("diasSemana", diasEnsaiados);
         model.addAttribute("produtos", hashVendidos);
-        model.addAttribute("mes", DataHora.formatar(data.getMonthValue()) + "/" + data.getYear() );
+        model.addAttribute("mes", DataHora.formatar(data.getMonthValue()+1) + "/" + data.getYear() );
 
         return "relatorio";
     }

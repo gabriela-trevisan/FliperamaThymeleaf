@@ -61,5 +61,17 @@ public class ClienteController {
 
     }
 
+    @PostMapping("/excluir")
+    public String deletarCliente(@RequestParam int id){
+
+        var cliente = userService.find(id);
+
+        userService.delete(cliente);
+
+        return "redirect:/logout";
+
+
+    }
+
 
 }

@@ -64,6 +64,10 @@
         <button type="submit" class="btn btn-primary">Salvar</button>
 
     </form>
+    <form method="post" th:action="@{/funcionario/deletarFuncionario}">
+        <input type="number" name="id" hidden th:value="${funcionario.getIdUsuario()}">
+        <button type="submit" class="btn btn-danger">Excluir</button>
+    </form>
 </div>
 
 

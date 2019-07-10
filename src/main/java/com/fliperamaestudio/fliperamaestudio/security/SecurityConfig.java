@@ -28,7 +28,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/usuario/*").hasAnyRole()
-                .antMatchers("/relatorio/").hasAnyRole("SUPER")
+                .antMatchers("/funcionario/*").hasAuthority("SUPER")
+                .antMatchers("/cliente/*").hasAuthority("CLI")
+                .antMatchers("/relatorio").hasAuthority("SUPER")
+                .antMatchers("/estoque").hasAnyAuthority("SUPER", "FUNC")
                 .antMatchers("/agendamento/agendar").hasAnyRole()
                 .antMatchers("/**").permitAll()
                 .antMatchers("/cadastrar").permitAll()

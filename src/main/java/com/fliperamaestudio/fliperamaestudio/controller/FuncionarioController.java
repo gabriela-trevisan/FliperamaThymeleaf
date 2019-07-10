@@ -51,7 +51,7 @@ public class FuncionarioController {
             return "cadastroFuncionario";
 
         }else {
-            return "login";
+            return "redirect:listaFuncionarios";
         }
 
     }
@@ -93,6 +93,7 @@ public class FuncionarioController {
 
         var funcionario = new Funcionario(nome, email, senha, endereco, salario, funcao);
         funcionario.setIdUsuario(id);
+        funcionario.setTipo(Tipo.FUNC);
         System.out.println(salario);
 
         userService.save(funcionario);
@@ -100,14 +101,14 @@ public class FuncionarioController {
         return "redirect:listaFuncionarios";
     }
 
-    @DeleteMapping("/deletarFuncionario")
+    @PostMapping("/deletarFuncionario")
     public String deletarFuncionario(@RequestParam int id){
 
         var funcionario = userService.find(id);
 
         userService.delete(funcionario);
 
-        return "redirect:/editarFuncionario";
+        return "redirect:listaFuncionarios";
 
 
     }
