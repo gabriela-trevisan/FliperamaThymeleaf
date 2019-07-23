@@ -2,7 +2,7 @@ package com.fliperamaestudio.fliperamaestudio.controller;
 
 
 import com.fliperamaestudio.fliperamaestudio.model.Agendamento;
-import com.fliperamaestudio.fliperamaestudio.util.DataHora;
+import com.fliperamaestudio.fliperamaestudio.utilities.DataHora;
 import com.fliperamaestudio.fliperamaestudio.repository.AgendamentoRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,4 +1,4 @@
-package com.fliperamaestudio.fliperamaestudio.util;
+package com.fliperamaestudio.fliperamaestudio.utilities;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
