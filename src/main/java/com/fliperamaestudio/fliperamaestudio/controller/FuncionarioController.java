@@ -32,15 +32,10 @@ public class FuncionarioController {
     }
 
     @PostMapping("/cadastroFuncionario")
-    public String cadastrarFuncionario(@RequestParam String nome,
-                                       @RequestParam String email,
-                                       @RequestParam String endereco,
-                                       @RequestParam double salario,
-                                       @RequestParam String funcao,
-                                       @RequestParam(required = false) String senha){
+    public String cadastrarFuncionario(Funcionario funcionario){
 
 
-        var funcionario = new Funcionario(nome, email, senha, endereco, salario, funcao);
+       // var funcionario = new Funcionario(nome, email, senha, endereco, salario, funcao);
 
         funcionario.setTipo(Tipo.FUNC);
 
@@ -81,19 +76,13 @@ public class FuncionarioController {
     }
 
     @PostMapping("/salvarFuncionario")
-    public String editarFuncionario(@RequestParam String nome,
-                                    @RequestParam String email,
-                                    @RequestParam String endereco,
-                                    @RequestParam int id,
-                                    @RequestParam double salario,
-                                    @RequestParam String funcao,
-                                    @RequestParam String senha){
+    public String editarFuncionario(Funcionario funcionario){
 
 
-        var funcionario = new Funcionario(nome, email, senha, endereco, salario, funcao);
-        funcionario.setIdUsuario(id);
+//        var funcionario = new Funcionario(nome, email, senha, endereco, salario, funcao);
+  //      funcionario.setIdUsuario(id);
         funcionario.setTipo(Tipo.FUNC);
-        System.out.println(salario);
+
 
         userService.save(funcionario);
 

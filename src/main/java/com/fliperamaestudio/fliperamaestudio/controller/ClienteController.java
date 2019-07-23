@@ -36,15 +36,11 @@ public class ClienteController {
 
 
     @PostMapping("editar")
-    public String cadastraUsuario(@RequestParam String nome,
-                                  @RequestParam String email,
-                                  @RequestParam(required = false) String senha,
-                                  @RequestParam String telefone,
-                                  @SessionAttribute("usuario") Usuario usuarioSession ) {
+    public String cadastraUsuario(Cliente cliente, @SessionAttribute("usuario") Usuario usuarioSession ) {
 
 
 
-            var cliente = new Cliente(nome, email, senha, telefone);
+          //  var cliente = new Cliente(nome, email, senha, telefone);
             cliente.setIdUsuario(usuarioSession.getIdUsuario());
             cliente.setTipo(Tipo.CLI);
             Usuario retorno = userService.save(cliente);
